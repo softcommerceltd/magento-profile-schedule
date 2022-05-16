@@ -12,7 +12,6 @@
 $scriptString = <<<script
 (function ($) {
     let response = {$response};
-    console.log(response.schedule);
     $('[data-role=profile-schedule]').trigger('add', response.schedule);
     $('#create_new_schedule').modal('closeModal');
 
