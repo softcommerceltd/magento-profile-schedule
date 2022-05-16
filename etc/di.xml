@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Profile schedule ::: interface | repository | management -->
+    <preference for="SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface" type="SoftCommerce\ProfileSchedule\Model\Schedule"/>
+    <preference for="SoftCommerce\ProfileSchedule\Api\Data\ScheduleSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="SoftCommerce\ProfileSchedule\Api\ScheduleRepositoryInterface" type="SoftCommerce\ProfileSchedule\Model\ScheduleRepository"/>
+    <preference for="SoftCommerce\ProfileSchedule\Model\ScheduleProcessorInterface" type="SoftCommerce\ProfileSchedule\Model\ScheduleProcessor"/>
+    <preference for="SoftCommerce\ProfileSchedule\Model\GetProfileIdByScheduleInterface" type="SoftCommerce\ProfileSchedule\Model\GetProfileIdBySchedule"/>
+    <preference for="SoftCommerce\ProfileSchedule\Model\GetScheduleDataInterface" type="SoftCommerce\ProfileSchedule\Model\GetScheduleData"/>
+    <preference for="SoftCommerce\ProfileSchedule\Model\IsActiveScheduleInterface" type="SoftCommerce\ProfileSchedule\Model\IsActiveSchedule"/>
+    <preference for="SoftCommerce\ProfileSchedule\Model\Schedule\CronExpressionValidatorInterface" type="SoftCommerce\ProfileSchedule\Model\Schedule\CronExpressionValidator"/>
+    <!-- Profile schedule UI list-->
+    <virtualType name="SoftCommerce\ProfileSchedule\Model\ResourceModel\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">softcommerce_profile_schedule</argument>
+            <argument name="resourceModel" xsi:type="string">SoftCommerce\ProfileSchedule\Model\ResourceModel\Schedule</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="softcommerce_profile_schedule_listing_data_source" xsi:type="string">SoftCommerce\ProfileSchedule\Model\ResourceModel\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface" xsi:type="string">SoftCommerce\ProfileSchedule\Api\ScheduleRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">softcommerce_profile_schedule</item>
+                    <item name="identifierField" xsi:type="string">entity_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <!-- profile config instance ::: schedule -->
+    <preference for="SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfigInterface" type="SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfig"/>
+    <!-- Logger -->
+    <virtualType name="SoftCommerce\ProfileSchedule\VirtualStreamHandler" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/softcommerce/scheduler.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SoftCommerce\ProfileSchedule\VirtualRotationStreamHandler" type="SoftCommerce\Core\Logger\Handler\RotationSteamHandler">
+        <arguments>
+            <argument name="fileName" xsi:type="string">var/log/softcommerce/scheduler.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SoftCommerce\ProfileSchedule\VirtualLogger" type="SoftCommerce\Core\Logger\LogProcessor">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">SoftCommerce\ProfileSchedule\VirtualStreamHandler</item>
+                <item name="rotation_debug" xsi:type="object">SoftCommerce\ProfileSchedule\VirtualRotationStreamHandler</item>
+                <item name="mail" xsi:type="object">SoftCommerce\Core\Logger\Handler\MailStreamHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="SoftCommerce\ProfileSchedule\Model\ScheduleProcessor">
+        <arguments>
+            <argument name="logger" xsi:type="object">SoftCommerce\ProfileSchedule\VirtualLogger</argument>
+        </arguments>
+    </type>
+</config>

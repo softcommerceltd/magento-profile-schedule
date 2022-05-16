@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">softcommerce_profile_schedule_form.softcommerce_profile_schedule_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">Profile Schedule</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <label translate="true">Profile Schedule</label>
+        <dataScope>data</dataScope>
+        <namespace>softcommerce_profile_schedule_form</namespace>
+        <!-- ajaxSaveType>simple</ajaxSaveType -->
+        <deps>
+            <dep>softcommerce_profile_schedule_form.softcommerce_profile_schedule_form_data_source</dep>
+        </deps>
+        <buttons>
+            <button name="back" class="SoftCommerce\ProfileSchedule\Ui\Component\Control\Client\BackButton"/>
+            <button name="reset">
+                <class>reset</class>
+                <label translate="true">Reset</label>
+            </button>
+            <button name="delete" class="SoftCommerce\ProfileSchedule\Ui\Component\Control\DeleteButton"/>
+            <button name="save" class="SoftCommerce\ProfileSchedule\Ui\Component\Control\SaveSplitButton"/>
+        </buttons>
+    </settings>
+    <dataSource name="softcommerce_profile_schedule_form_data_source" component="Magento_Ui/js/form/provider">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <validateUrl path="softcommerce/profileSchedule/validate"/>
+            <submitUrl path="softcommerce/profileSchedule/save"/>
+        </settings>
+        <dataProvider class="SoftCommerce\ProfileSchedule\Ui\DataProvider\ScheduleDataProvider" name="softcommerce_profile_schedule_form_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>entity_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label translate="true">Schedule Setting</label>
+            <dataScope>general</dataScope>
+            <componentType>fieldset</componentType>
+        </settings>
+        <field name="entity_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Schedule ID</label>
+                <dataType>number</dataType>
+                <dataScope>entity_id</dataScope>
+                <visible>false</visible>
+            </settings>
+        </field>
+        <field name="status" formElement="checkbox">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">general</item>
+                    <item name="default" xsi:type="number">1</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Enable Schedule</label>
+                <dataType>boolean</dataType>
+                <dataScope>status</dataScope>
+            </settings>
+            <formElements>
+                <checkbox>
+                    <settings>
+                        <valueMap>
+                            <map name="false" xsi:type="number">0</map>
+                            <map name="true" xsi:type="number">1</map>
+                        </valueMap>
+                        <prefer>toggle</prefer>
+                    </settings>
+                </checkbox>
+            </formElements>
+        </field>
+        <field name="name" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Name</label>
+                <dataType>text</dataType>
+                <dataScope>name</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <tooltip>
+                    <description translate="true">Name of schedule (used internally).</description>
+                </tooltip>
+            </settings>
+        </field>
+        <field name="type_id" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Profile Type</label>
+                <dataType>text</dataType>
+                <dataScope>type_id</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <tooltip>
+                    <description translate="true">Profile schedules are unique; therefore, absence of options within the dropdown indicates that the schedule already exists.</description>
+                </tooltip>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="SoftCommerce\ProfileSchedule\Model\Source\ProfileTypeOptions"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+        <field name="cron_expression" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">general</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Cron Expression</label>
+                <dataType>text</dataType>
+                <dataScope>cron_expression</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                </validation>
+                <tooltip>
+                    <description translate="true"><![CDATA[
+                    Cron expression that triggers scheduler to run at certain intervals.
+                    Examples: <a href="https://crontab.guru/" target="_blank">crontab.guru</a>
+                    ]]></description>
+                </tooltip>
+            </settings>
+        </field>
+    </fieldset>
+    <fieldset name="profiles">
+        <settings>
+            <label translate="true">Profiles</label>
+            <dataScope>profiles</dataScope>
+            <componentType>fieldset</componentType>
+            <collapsible>true</collapsible>
+            <visible>true</visible>
+        </settings>
+        <field name="assigned_profiles" component="SoftCommerce_ProfileSchedule/js/components/parse-option-ui-select" formElement="select">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="filterOptions" xsi:type="boolean">true</item>
+                    <item name="multiple" xsi:type="boolean">true</item>
+                    <item name="showCheckbox" xsi:type="boolean">false</item>
+                    <item name="disableLabel" xsi:type="boolean">true</item>
+                    <item name="levelsVisibility" xsi:type="number">1</item>
+                    <item name="source" xsi:type="string">assigned_profiles</item>
+                </item>
+            </argument>
+            <settings>
+                <label translate="true">Assigned Profiles</label>
+                <componentType>field</componentType>
+                <required>true</required>
+                <elementTmpl>ui/grid/filters/elements/ui-select</elementTmpl>
+                <dataScope>assigned_profiles</dataScope>
+                <validation>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
+                </validation>
+            </settings>
+            <formElements>
+                <select>
+                    <settings>
+                        <options class="SoftCommerce\Profile\Model\Source\ProfileEntity"/>
+                        <caption translate="true">-- Please Select --</caption>
+                    </settings>
+                </select>
+            </formElements>
+        </field>
+    </fieldset>
+    <fieldset name="schedule_list">
+        <settings>
+            <label translate="true">Schedule List</label>
+            <dataScope>schedule_list</dataScope>
+            <componentType>fieldset</componentType>
+            <collapsible>true</collapsible>
+            <visible>false</visible>
+        </settings>
+        <insertListing name="cron_schedule_listing" component="SoftCommerce_ProfileSchedule/js/components/insert-listing">
+            <settings>
+                <autoRender>false</autoRender>
+                <dataScope>cron_schedule_listing</dataScope>
+                <ns>softcommerce_cron_schedule_listing</ns>
+                <externalProvider>${ $.ns }.softcommerce_cron_schedule_listing_data_source</externalProvider>
+                <selectionsProvider>${ $.ns }.${ $.ns }.softcommerce_cron_schedule_columns.ids</selectionsProvider>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <exports>
+                    <link name="job_code">${ $.externalProvider }:params.job_code</link>
+                </exports>
+                <imports>
+                    <link name="job_code">${ $.provider }:data.general.type_id</link>
+                    <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
+                    <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>
+                </imports>
+            </settings>
+        </insertListing>
+    </fieldset>
+    <fieldset name="history_list">
+        <settings>
+            <label translate="true">History List</label>
+            <dataScope>history_list</dataScope>
+            <componentType>fieldset</componentType>
+            <collapsible>true</collapsible>
+            <visible>false</visible>
+        </settings>
+        <insertListing name="profile_history_listing" component="SoftCommerce_ProfileSchedule/js/components/insert-listing">
+            <settings>
+                <autoRender>false</autoRender>
+                <dataScope>profile_history_listing</dataScope>
+                <ns>softcommerce_profile_history_listing</ns>
+                <externalProvider>${ $.ns }.softcommerce_profile_history_listing_data_source</externalProvider>
+                <selectionsProvider>${ $.ns }.${ $.ns }.softcommerce_profile_history_columns.ids</selectionsProvider>
+                <dataLinks>
+                    <exports>false</exports>
+                    <imports>true</imports>
+                </dataLinks>
+                <exports>
+                    <link name="job_code">${ $.externalProvider }:params.job_code</link>
+                </exports>
+                <imports>
+                    <link name="job_code">${ $.provider }:data.general.type_id</link>
+                    <link name="onAction">ns = ${ $.ns }, index = actions:action</link>
+                    <link name="onMassAction">ns = ${ $.ns }, index = listing_massaction:massaction</link>
+                </imports>
+            </settings>
+        </insertListing>
+    </fieldset>
+</form>

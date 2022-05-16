@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<page layout="admin-1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="softcommerce_profileschedule_edit"/>
+    <body>
+        <referenceContainer name="notifications" remove="true"/>
+        <referenceBlock name="locale.switcher" remove="true"/>
+        <referenceContainer name="legal" remove="true"/>
+        <referenceContainer name="page.menu" remove="true"/>
+        <referenceContainer name="header" remove="true"/>
+        <referenceBlock name="menu" remove="true"/>
+    </body>
+</page>

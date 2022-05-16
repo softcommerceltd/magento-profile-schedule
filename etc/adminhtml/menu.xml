@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="SoftCommerce_ProfileSchedule::profile_schedule"
+             title="Manage Schedules"
+             translate="title"
+             module="SoftCommerce_ProfileSchedule"
+             sortOrder="0"
+             parent="SoftCommerce_Profile::profile_core"
+             action="softcommerce/profileSchedule/index"
+             resource="SoftCommerce_ProfileSchedule::profile_schedule"/>
+    </menu>
+</config>

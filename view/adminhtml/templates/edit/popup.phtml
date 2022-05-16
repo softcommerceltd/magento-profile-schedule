@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright © Soft Commerce Ltd. All rights reserved.
+ * See LICENSE.txt for license details.
+ */
+
+/** @var \SoftCommerce\ProfileSchedule\Block\Adminhtml\Edit\Popup $block */
+/** @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer */
+?>
+
+<?php $response = /* @noEscape */ $block->getResponseJson();
+$scriptString = <<<script
+(function ($) {
+    let response = {$response};
+    console.log(response.schedule);
+    $('[data-role=profile-schedule]').trigger('add', response.schedule);
+    $('#create_new_schedule').modal('closeModal');
+
+})(window.parent.jQuery);
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

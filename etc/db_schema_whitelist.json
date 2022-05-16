@@ -1,0 +1,18 @@
+{
+    "softcommerce_profile_schedule": {
+        "column": {
+            "entity_id": true,
+            "type_id": true,
+            "status": true,
+            "name": true,
+            "cron_expression": true,
+            "message": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "SOFTCOMMERCE_PROFILE_SCHEDULE_TYPE_ID": true
+        }
+    }
+}

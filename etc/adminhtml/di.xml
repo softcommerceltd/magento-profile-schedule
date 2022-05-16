@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!--
+ ~ Copyright © Soft Commerce Ltd. All rights reserved.
+ ~ See LICENSE.txt for license details.
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Form Buttons configuration -->
+    <virtualType name="SoftCommerce\ProfileSchedule\Ui\Component\Control\SaveSplitButton" type="SoftCommerce\Core\Ui\Component\Control\SaveSplitButtonExtended">
+        <arguments>
+            <argument name="targetName" xsi:type="string">softcommerce_profile_schedule_form.softcommerce_profile_schedule_form</argument>
+            <argument name="aclResource" xsi:type="string">SoftCommerce_ProfileSchedule::manage</argument>
+            <argument name="sortOrder" xsi:type="number">40</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SoftCommerce\ProfileSchedule\Ui\Component\Control\Client\BackButton" type="SoftCommerce\Core\Ui\Component\Control\BackButton">
+        <arguments>
+            <argument name="backUrl" xsi:type="string">*/*/</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="SoftCommerce\ProfileSchedule\Ui\Component\Control\DeleteButton" type="SoftCommerce\Core\Ui\Component\Control\DeleteButton">
+        <arguments>
+            <argument name="idFieldName" xsi:type="string">id</argument>
+            <argument name="actionRoutePath" xsi:type="string">*/*/delete</argument>
+            <argument name="aclResource" xsi:type="string">SoftCommerce_ProfileSchedule::delete</argument>
+            <argument name="buttonClass" xsi:type="string">delete btn btn-secondary</argument>
+            <argument name="buttonLabel" xsi:type="string" translatable="true">Delete</argument>
+            <argument name="confirmationMessage" xsi:type="string" translatable="true">Confirm delete schedule?</argument>
+            <argument name="sortOrder" xsi:type="number">90</argument>
+        </arguments>
+    </virtualType>
+    <!-- Profile schedule UI modifier -->
+    <virtualType name="SoftCommerce\ProfileSchedule\Ui\DataProvider\Form\Modifier\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="profile_history_list" xsi:type="array">
+                    <item name="class" xsi:type="string">SoftCommerce\ProfileSchedule\Ui\DataProvider\Schedule\Modifier\Form\HistoryListModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+                <item name="profile_schedule_list" xsi:type="array">
+                    <item name="class" xsi:type="string">SoftCommerce\ProfileSchedule\Ui\DataProvider\Schedule\Modifier\Form\ScheduleListModifier</item>
+                    <item name="sortOrder" xsi:type="number">2</item>
+                </item>
+                <item name="profile_assignment_data" xsi:type="array">
+                    <item name="class" xsi:type="string">SoftCommerce\ProfileSchedule\Ui\DataProvider\Schedule\Modifier\Form\ProfileAssignmentModifier</item>
+                    <item name="sortOrder" xsi:type="number">3</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="SoftCommerce\ProfileSchedule\Ui\DataProvider\ScheduleDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">SoftCommerce\ProfileSchedule\Ui\DataProvider\Form\Modifier\Pool</argument>
+        </arguments>
+    </type>
+    <!-- Cron schedule UI modifier -->
+    <!-- virtualType name="SoftCommerce\ProfileSchedule\Ui\DataProvider\CronSchedule\Modifier\Listing\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="listing_massaction" xsi:type="array">
+                    <item name="class" xsi:type="string">SoftCommerce\ProfileSchedule\Ui\DataProvider\CronSchedule\Modifier\Listing\MassActionModifier</item>
+                    <item name="sortOrder" xsi:type="number">1</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="SoftCommerce\ProfileSchedule\Ui\DataProvider\CronScheduleListingDataProvider">
+        <arguments>
+            <argument name="pool" xsi:type="object">SoftCommerce\ProfileSchedule\Ui\DataProvider\CronSchedule\Modifier\Listing\Pool</argument>
+        </arguments>
+    </type -->
+</config>

@@ -1,0 +1,20 @@
+{
+    "name": "softcommerce/module-profile-schedule",
+    "description": "SoftCommerce -- Magento: Profile Schedule Module.",
+    "require": {
+        "php": "~7.2.0||~7.3.0||~7.4.0||~8.0.0",
+        "magento/magento-composer-installer": "*",
+        "softcommerce/module-profile": "*"
+    },
+    "type": "magento2-module",
+    "license": "EULA",
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "SoftCommerce\\ProfileSchedule\\": ""
+        }
+    },
+    "version": "1.0.0"
+}
