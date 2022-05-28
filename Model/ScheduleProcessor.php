@@ -123,14 +123,6 @@ class ScheduleProcessor implements ScheduleProcessorInterface
         }
 
         foreach ($this->queues as $taskCode => $queue) {
-
-            $writer = new \Zend_Log_Writer_Stream(BP . '/var/log/dev.log');
-            $logger = new \Zend_Log();
-            $logger->addWriter($writer);
-            $logger->debug(print_r([
-                '$taskCode' => $taskCode
-            ], true), []);
-
             try {
                 $response = $queue->execute($profileId);
                 $response = $response->getData();
