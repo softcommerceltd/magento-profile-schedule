@@ -167,8 +167,13 @@ class Save extends Action implements HttpPostActionInterface
     private function processCrontabSave(): void
     {
         $typeId = $this->getModel()->getTypeId();
-        $cronExpression = $this->getModel()->getCronExpression();
-        if (!$typeId || !$cronExpression || !$cronGroup = $this->typeInstanceOptions->getCronGroupByTypeId($typeId)) {
+        $cronExpression = $this->getModel()->getCronExpression() ?: null;
+
+        if (!$this->getModel()->isActive()) {
+            $cronExpression = null;
+        }
+
+        if (!$typeId || !$cronGroup = $this->typeInstanceOptions->getCronGroupByTypeId($typeId)) {
             return;
         }
 

@@ -15,9 +15,6 @@
                 comment="Name"/>
         <column xsi:type="varchar" name="cron_expression" nullable="true" length="16"
                 comment="Cron Expression"/>
-        <column xsi:type="text" name="message" nullable="true"/>
-        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
-                comment="Created At"/>
         <column xsi:type="timestamp" name="updated_at" on_update="true" nullable="false" default="CURRENT_TIMESTAMP"
                 comment="Updated At"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

@@ -128,41 +128,6 @@ class Schedule extends AbstractModel implements ScheduleInterface, IdentityInter
     /**
      * @inheritDoc
      */
-    public function getMessage(): array
-    {
-        return $this->getDataSerialized(self::MESSAGE);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setMessage($message)
-    {
-        $message = is_array($message) ? $message : [$message];
-        $this->setDataSerialized(self::MESSAGE, $message);
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getCreatedAt(): ?string
-    {
-        return $this->getData(self::CREATED_AT);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function setCreatedAt(string $createdAt)
-    {
-        $this->setData(self::CREATED_AT, $createdAt);
-        return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getUpdatedAt(): ?string
     {
         return $this->getData(self::UPDATED_AT);
@@ -175,5 +140,13 @@ class Schedule extends AbstractModel implements ScheduleInterface, IdentityInter
     {
         $this->setData(self::UPDATED_AT, $updatedAt);
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isActive(): bool
+    {
+        return (bool) $this->getStatus();
     }
 }

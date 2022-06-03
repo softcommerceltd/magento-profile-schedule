@@ -21,8 +21,6 @@ interface ScheduleInterface
     public const TYPE_ID = 'type_id';
     public const STATUS = 'status';
     public const CRON_EXPRESSION = 'cron_expression';
-    public const MESSAGE = 'message';
-    public const CREATED_AT = 'created_at';
     public const UPDATED_AT = 'updated_at';
 
     /**
@@ -69,32 +67,10 @@ interface ScheduleInterface
     public function getCronExpression(): ?string;
 
     /**
-     * @param $code
+     * @param string $cronExpression
      * @return $this
      */
     public function setCronExpression(string $cronExpression);
-
-    /**
-     * @return array
-     */
-    public function getMessage(): array;
-
-    /**
-     * @param string|array $message
-     * @return $this
-     */
-    public function setMessage($message);
-
-    /**
-     * @return string|null
-     */
-    public function getCreatedAt(): ?string;
-
-    /**
-     * @param string $createdAt
-     * @return $this
-     */
-    public function setCreatedAt(string $createdAt);
 
     /**
      * @return string|null
@@ -106,4 +82,9 @@ interface ScheduleInterface
      * @return $this
      */
     public function setUpdatedAt(string $updatedAt);
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool;
 }

@@ -107,12 +107,8 @@ class Validate extends Action implements HttpPostActionInterface, HttpGetActionI
     private function validateCronExpression(): void
     {
         $request = $this->getRequest()->getParam('general');
-        if (!$cronExpression = $request[ScheduleInterface::CRON_EXPRESSION] ?? '') {
-            throw new CronException(
-                __('Cron expression is empty.')
-            );
+        if ($cronExpression = $request[ScheduleInterface::CRON_EXPRESSION] ?? '') {
+            $this->cronExpressionValidator->isValid($cronExpression);
         }
-
-        $this->cronExpressionValidator->isValid($cronExpression);
     }
 }

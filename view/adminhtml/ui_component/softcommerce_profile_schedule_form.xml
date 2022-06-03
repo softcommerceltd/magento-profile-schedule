@@ -144,7 +144,7 @@
                 <dataType>text</dataType>
                 <dataScope>cron_expression</dataScope>
                 <validation>
-                    <rule name="required-entry" xsi:type="boolean">true</rule>
+                    <rule name="required-entry" xsi:type="boolean">false</rule>
                 </validation>
                 <tooltip>
                     <description translate="true"><![CDATA[

@@ -52,20 +52,4 @@
             <argument name="pool" xsi:type="object">SoftCommerce\ProfileSchedule\Ui\DataProvider\Form\Modifier\Pool</argument>
         </arguments>
     </type>
-    <!-- Cron schedule UI modifier -->
-    <!-- virtualType name="SoftCommerce\ProfileSchedule\Ui\DataProvider\CronSchedule\Modifier\Listing\Pool" type="Magento\Ui\DataProvider\Modifier\Pool">
-        <arguments>
-            <argument name="modifiers" xsi:type="array">
-                <item name="listing_massaction" xsi:type="array">
-                    <item name="class" xsi:type="string">SoftCommerce\ProfileSchedule\Ui\DataProvider\CronSchedule\Modifier\Listing\MassActionModifier</item>
-                    <item name="sortOrder" xsi:type="number">1</item>
-                </item>
-            </argument>
-        </arguments>
-    </virtualType>
-    <type name="SoftCommerce\ProfileSchedule\Ui\DataProvider\CronScheduleListingDataProvider">
-        <arguments>
-            <argument name="pool" xsi:type="object">SoftCommerce\ProfileSchedule\Ui\DataProvider\CronSchedule\Modifier\Listing\Pool</argument>
-        </arguments>
-    </type -->
 </config>

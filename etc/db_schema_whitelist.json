@@ -6,8 +6,6 @@
             "status": true,
             "name": true,
             "cron_expression": true,
-            "message": true,
-            "created_at": true,
             "updated_at": true
         },
         "constraint": {
