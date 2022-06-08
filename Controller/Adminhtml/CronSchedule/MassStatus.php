@@ -11,8 +11,8 @@ namespace SoftCommerce\ProfileSchedule\Controller\Adminhtml\CronSchedule;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface as HttpPostActionInterface;
 use Magento\Framework\App\ResourceConnection;
-use Magento\Framework\Data\Collection;
 use Magento\Ui\Component\MassAction\Filter;
+use SoftCommerce\ProfileSchedule\Model\ResourceModel\CronSchedule\Collection;
 use SoftCommerce\ProfileSchedule\Model\ResourceModel\CronSchedule\CollectionFactory;
 
 /**
