@@ -51,11 +51,11 @@ define([
                 closed: function () {
                     let doc = self.iframe.get(0).document;
 
-                    if (doc && $.isFunction(doc.execCommand)) {
+                    if (doc && typeof doc.execCommand === 'function') {
                         doc.execCommand('stop');
                         self.iframe.remove();
                     }
-                    self.modal.data('modal').modal.remove();
+                    self.modal.data('mageModal').modal.remove();
                     $(window).off('resize.modal');
                 }
             });
@@ -66,7 +66,7 @@ define([
          * @private
          */
         _getHeight: function () {
-            let modal = this.modal.data('modal').modal,
+            let modal = this.modal.data('mageModal').modal,
                 modalHead = modal.find('header'),
                 modalHeadHeight = modalHead.outerHeight(),
                 modalHeight = modal.outerHeight(),
