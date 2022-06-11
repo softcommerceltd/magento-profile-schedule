@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.2
+- **Improvement**: [M2P-4] Re-initialise config cache after saving new schedule cron task.
+
 ### Version 1.2.1
 - **Compatibility**: JS Modal: IE9 break script loading and avoid execution on iframe [#5]
 

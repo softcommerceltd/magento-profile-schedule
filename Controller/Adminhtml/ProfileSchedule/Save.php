@@ -11,6 +11,7 @@ namespace SoftCommerce\ProfileSchedule\Controller\Adminhtml\ProfileSchedule;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\Config\ReinitableConfigInterface;
 use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\Redirect;
@@ -35,9 +36,9 @@ class Save extends Action implements HttpPostActionInterface
     /**
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
-    const CRON_SCHEDULE_PATH = 'crontab/%s/jobs/%s/schedule/cron_expr';
+    private const CRON_SCHEDULE_PATH = 'crontab/%s/jobs/%s/schedule/cron_expr';
 
     /**
      * @var ConfigScopeWriterInterface
@@ -65,6 +66,11 @@ class Save extends Action implements HttpPostActionInterface
     private $layoutFactory;
 
     /**
+     * @var ReinitableConfigInterface
+     */
+    private $reinitableConfig;
+
+    /**
      * @var ScheduleRepositoryInterface
      */
     private $repository;
@@ -83,6 +89,7 @@ class Save extends Action implements HttpPostActionInterface
      * @param ConfigScopeWriterInterface $configScopeWriter
      * @param GetProfileIdByScheduleInterface $getProfileIdBySchedule
      * @param LayoutFactory $layoutFactory
+     * @param ReinitableConfigInterface $reinitableConfig
      * @param ScheduleFactory $modelFactory
      * @param ScheduleRepositoryInterface $repository
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
@@ -93,6 +100,7 @@ class Save extends Action implements HttpPostActionInterface
         ConfigScopeWriterInterface $configScopeWriter,
         GetProfileIdByScheduleInterface $getProfileIdBySchedule,
         LayoutFactory $layoutFactory,
+        ReinitableConfigInterface $reinitableConfig,
         ScheduleFactory $modelFactory,
         ScheduleRepositoryInterface $repository,
         TypeInstanceOptionsInterface $typeInstanceOptions,
@@ -102,6 +110,7 @@ class Save extends Action implements HttpPostActionInterface
         $this->configScopeWriter = $configScopeWriter;
         $this->getProfileIdBySchedule = $getProfileIdBySchedule;
         $this->layoutFactory = $layoutFactory;
+        $this->reinitableConfig = $reinitableConfig;
         $this->modelFactory = $modelFactory;
         $this->repository = $repository;
         $this->typeInstanceOptions = $typeInstanceOptions;
@@ -181,6 +190,8 @@ class Save extends Action implements HttpPostActionInterface
             sprintf(self::CRON_SCHEDULE_PATH, $cronGroup, $typeId),
             $cronExpression
         );
+
+        $this->reinitableConfig->reinit();
     }
 
     /**
