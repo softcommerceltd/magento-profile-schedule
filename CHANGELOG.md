@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.1.2
+- **Enhancement**: Changes to PDT.
+
 ### Version 1.1.1
 - **Improvement**: [M2P-4] Re-initialise config cache after saving new schedule cron task.
 
