@@ -118,10 +118,6 @@ class ScheduleProcessor implements ScheduleProcessorInterface
      */
     private function processQueue(int $profileId): void
     {
-        if (!$this->scheduleConfig($profileId)->isActive()) {
-            return;
-        }
-
         foreach ($this->queues as $taskCode => $queue) {
             try {
                 $response = $queue->execute($profileId);
