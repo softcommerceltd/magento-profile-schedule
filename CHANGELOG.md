@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.0.5
+- **Enhancement**: Allow inactive schedule process in order to collect profile data. Move `active/inactive` condition to each profile instead.
+
 ### Version 1.0.4
 - **Enhancement**: Changes to PDT.
 
