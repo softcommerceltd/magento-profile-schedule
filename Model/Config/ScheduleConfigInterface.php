@@ -23,6 +23,7 @@ interface ScheduleConfigInterface extends ConfigInterface
     public const XML_PATH_STATUS = '/schedule_config/status';
     public const XML_PATH_SCHEDULE_ID = '/schedule_config/schedule_id';
     public const XML_PATH_PROCESS_BATCH_SIZE = '/schedule_config/process_batch_size';
+    public const XML_PATH_RETRY_ON_ERROR = '/schedule_config/retry_on_error';
     public const XML_PATH_ENABLE_HISTORY = '/schedule_config/enable_history';
 
     /**
@@ -48,4 +49,10 @@ interface ScheduleConfigInterface extends ConfigInterface
      * @throws LocalizedException
      */
     public function isActiveHistory(): bool;
+
+    /**
+     * @return bool
+     * @throws LocalizedException
+     */
+    public function shouldRetryOnError(): bool;
 }

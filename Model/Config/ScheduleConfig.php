@@ -46,4 +46,12 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
     {
         return (bool) $this->getConfig($this->getTypeId() . self::XML_PATH_ENABLE_HISTORY);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function shouldRetryOnError(): bool
+    {
+        return (bool) $this->getConfig($this->getTypeId() . self::XML_PATH_RETRY_ON_ERROR);
+    }
 }
