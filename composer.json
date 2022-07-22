@@ -3,7 +3,6 @@
     "description": "SoftCommerce -- Magento: Profile Schedule Module.",
     "require": {
         "php": "~7.4.0||~8.0.0||~8.1.0",
-        "magento/magento-composer-installer": "*",
         "softcommerce/module-profile": "*"
     },
     "type": "magento2-module",
@@ -16,5 +15,5 @@
             "SoftCommerce\\ProfileSchedule\\": ""
         }
     },
-    "version": "1.2.4"
+    "version": "1.2.5"
 }

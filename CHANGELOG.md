@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.5
+- **Compatibility**: Compatibility with Magento Extension Quality Program (EQP).
+
 ### Version 1.2.4
 - **Enhancement**: Allow inactive schedule process in order to collect profile data. Move `active/inactive` condition to each profile instead.
 
