@@ -55,7 +55,13 @@ define([
                         doc.execCommand('stop');
                         self.iframe.remove();
                     }
-                    self.modal.data('mageModal').modal.remove();
+
+                    let modalData = self.modal.data('mageModal');
+                    if (_.isUndefined(modalData)) {
+                        modalData = self.modal.data('modal');
+                    }
+
+                    modalData.modal.remove();
                     $(window).off('resize.modal');
                 }
             });
@@ -66,7 +72,12 @@ define([
          * @private
          */
         _getHeight: function () {
-            let modal = this.modal.data('mageModal').modal,
+            let modalData = this.modal.data('mageModal');
+            if (_.isUndefined(modalData)) {
+                modalData = this.modal.data('modal');
+            }
+
+            let modal = modalData.modal,
                 modalHead = modal.find('header'),
                 modalHeadHeight = modalHead.outerHeight(),
                 modalHeight = modal.outerHeight(),
@@ -90,7 +101,6 @@ define([
             this.modal.parent().outerHeight(this._getHeight());
             this.iframe.outerHeight(this._getHeight());
             this.iframe.outerWidth(this._getWidth());
-
         },
 
         /**
