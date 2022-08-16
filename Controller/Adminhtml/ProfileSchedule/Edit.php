@@ -21,7 +21,7 @@ class Edit extends Action implements HttpGetActionInterface
     /**
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @inheritDoc

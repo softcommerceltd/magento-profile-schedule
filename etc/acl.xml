@@ -10,14 +10,8 @@
         <resources>
             <resource id="Magento_Backend::admin">
                 <resource id="SoftCommerce_Core::softcommerce_core">
-                    <resource id="SoftCommerce_Profile::profile_core" title="SoftCommerce Profile" translate="title" sortOrder="20">
-                        <resource id="SoftCommerce_ProfileSchedule::profile_schedule" title="Manage Schedules" translate="title" sortOrder="20">
-                            <resource id="SoftCommerce_ProfileSchedule::manage" title="All Schedules" translate="title" sortOrder="10">
-                                <resource id="SoftCommerce_ProfileSchedule::actions" title="Actions" translate="title" sortOrder="10">
-                                    <resource id="SoftCommerce_ProfileSchedule::delete" title="Delete" translate="title" sortOrder="10" />
-                                </resource>
-                            </resource>
-                        </resource>
+                    <resource id="SoftCommerce_Profile::profile">
+                        <resource id="SoftCommerce_ProfileSchedule::manage" title="Schedule Actions" translate="title" sortOrder="20"/>
                     </resource>
                 </resource>
             </resource>

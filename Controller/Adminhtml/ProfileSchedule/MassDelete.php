@@ -24,7 +24,7 @@ class MassDelete extends AbstractMassAction
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::delete';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @var ResourceModel\Schedule
@@ -32,10 +32,10 @@ class MassDelete extends AbstractMassAction
     private $resource;
 
     /**
-     * @param Context $context
-     * @param Filter $filter
      * @param ResourceModel\Schedule $resource
      * @param ResourceModel\Schedule\CollectionFactory $collectionFactory
+     * @param Filter $filter
+     * @param Context $context
      */
     public function __construct(
         ResourceModel\Schedule $resource,

@@ -28,7 +28,7 @@ abstract class ProfileSchedule extends Action
     /**
      * @inheritDoc
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::profile_schedule';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @var string

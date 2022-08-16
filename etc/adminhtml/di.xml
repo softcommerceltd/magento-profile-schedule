@@ -23,7 +23,7 @@
         <arguments>
             <argument name="idFieldName" xsi:type="string">id</argument>
             <argument name="actionRoutePath" xsi:type="string">*/*/delete</argument>
-            <argument name="aclResource" xsi:type="string">SoftCommerce_ProfileSchedule::delete</argument>
+            <argument name="aclResource" xsi:type="string">SoftCommerce_ProfileSchedule::manage</argument>
             <argument name="buttonClass" xsi:type="string">delete btn btn-secondary</argument>
             <argument name="buttonLabel" xsi:type="string" translatable="true">Delete</argument>
             <argument name="confirmationMessage" xsi:type="string" translatable="true">Confirm delete schedule?</argument>

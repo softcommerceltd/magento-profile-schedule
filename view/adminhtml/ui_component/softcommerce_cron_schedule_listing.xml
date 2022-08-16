@@ -27,7 +27,7 @@
             </storageConfig>
             <updateUrl path="mui/index/render"/>
         </settings>
-        <aclResource>SoftCommerce_Profile::profile</aclResource>
+        <aclResource>SoftCommerce_Profile::manage</aclResource>
         <dataProvider class="SoftCommerce\ProfileSchedule\Ui\DataProvider\CronScheduleListingDataProvider" name="softcommerce_cron_schedule_listing_data_source">
             <settings>
                 <requestFieldName>id</requestFieldName>

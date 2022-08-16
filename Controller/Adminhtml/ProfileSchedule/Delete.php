@@ -25,7 +25,7 @@ class Delete extends Action implements HttpPostActionInterface
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::delete';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @var ScheduleRepositoryInterface
@@ -45,11 +45,9 @@ class Delete extends Action implements HttpPostActionInterface
     }
 
     /**
-     * Delete action
-     *
-     * @return ResultInterface
+     * @inheritDoc
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultRedirectFactory->create();

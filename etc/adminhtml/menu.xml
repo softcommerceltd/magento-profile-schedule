@@ -14,6 +14,6 @@
              sortOrder="0"
              parent="SoftCommerce_Profile::profile_core"
              action="softcommerce/profileSchedule/index"
-             resource="SoftCommerce_ProfileSchedule::profile_schedule"/>
+             resource="SoftCommerce_ProfileSchedule::manage"/>
     </menu>
 </config>

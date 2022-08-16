@@ -24,7 +24,7 @@ abstract class AbstractMassAction extends Action
     /**
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @var string
@@ -58,9 +58,8 @@ abstract class AbstractMassAction extends Action
 
     /**
      * @inheritDoc
-     * @return Redirect
      */
-    public function execute()
+    public function execute(): Redirect
     {
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);

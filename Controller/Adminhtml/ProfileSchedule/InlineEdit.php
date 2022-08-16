@@ -25,7 +25,7 @@ class InlineEdit extends Action implements HttpPostActionInterface
     /**
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @var Schedule

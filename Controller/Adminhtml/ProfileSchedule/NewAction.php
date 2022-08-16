@@ -12,8 +12,6 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\ForwardFactory;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\Controller\ResultInterface;
 
 /**
  * @inheritDoc
@@ -23,7 +21,7 @@ class NewAction extends Action implements HttpGetActionInterface
     /**
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
+    public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
      * @var ForwardFactory
@@ -43,7 +41,7 @@ class NewAction extends Action implements HttpGetActionInterface
     }
 
     /**
-     * @return ResponseInterface|ResultInterface|void
+     * @inheritDoc
      */
     public function execute()
     {

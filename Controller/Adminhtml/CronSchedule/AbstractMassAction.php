@@ -26,7 +26,7 @@ abstract class AbstractMassAction extends Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'SoftCommerce_Profile::profile';
+    public const ADMIN_RESOURCE = 'SoftCommerce_Profile::manage';
 
     /**
      * @var string
@@ -44,9 +44,9 @@ abstract class AbstractMassAction extends Action
     protected $collectionFactory;
 
     /**
-     * @param Context $context
-     * @param Filter $filter
      * @param CollectionFactory $collectionFactory
+     * @param Filter $filter
+     * @param Context $context
      */
     public function __construct(
         CollectionFactory $collectionFactory,
@@ -60,9 +60,8 @@ abstract class AbstractMassAction extends Action
 
     /**
      * @inheritDoc
-     * @return Redirect
      */
-    public function execute()
+    public function execute(): Redirect
     {
         /** @var Redirect $resultRedirect */
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
