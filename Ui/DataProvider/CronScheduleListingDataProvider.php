@@ -10,8 +10,10 @@ namespace SoftCommerce\ProfileSchedule\Ui\DataProvider;
 
 use Magento\Framework\Api\Filter;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Ui\DataProvider\AbstractDataProvider;
 use Magento\Ui\DataProvider\Modifier\PoolInterface;
+use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
 use SoftCommerce\ProfileSchedule\Model\ResourceModel\CronSchedule\Collection;
 use SoftCommerce\ProfileSchedule\Model\ResourceModel\CronSchedule\CollectionFactory;
 
@@ -28,8 +30,14 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
     private $pool;
 
     /**
+     * @var TypeInstanceOptionsInterface
+     */
+    private $typeInstanceOptions;
+
+    /**
      * @param CollectionFactory $collectionFactory
      * @param PoolInterface $pool
+     * @param TypeInstanceOptionsInterface $typeInstanceOptions
      * @param string $name
      * @param string $primaryFieldName
      * @param string $requestFieldName
@@ -39,6 +47,7 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
     public function __construct(
         CollectionFactory $collectionFactory,
         PoolInterface $pool,
+        TypeInstanceOptionsInterface $typeInstanceOptions,
         string $name,
         string $primaryFieldName,
         string $requestFieldName,
@@ -47,6 +56,7 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
     ) {
         $this->collection = $collectionFactory->create();
         $this->pool = $pool;
+        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
@@ -96,5 +106,15 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
         }
 
         return $meta;
+    }
+
+    /**
+     * @return AbstractCollection
+     */
+    public function getCollection(): AbstractCollection
+    {
+        $collection = parent::getCollection();
+        $collection->addFieldToFilter('job_code', ['in' => array_keys($this->typeInstanceOptions->getTypes())]);
+        return $collection;
     }
 }

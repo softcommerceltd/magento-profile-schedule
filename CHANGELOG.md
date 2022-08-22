@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.7
+- **Enhancement**: Added profile type ID filter to cron_schedule collection.
+
 ### Version 1.2.6
 - **Enhancement**: Improvements to ACL rules.
 
