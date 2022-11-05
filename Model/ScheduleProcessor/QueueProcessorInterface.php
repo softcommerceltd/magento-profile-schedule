@@ -17,6 +17,8 @@ use SoftCommerce\Core\Framework\MessageStorageInterface;
  */
 interface QueueProcessorInterface
 {
+    public const IS_SCHEDULED_EVENT = 'isScheduledEvent';
+
     /**
      * @param int $profileId
      * @return MessageStorageInterface
