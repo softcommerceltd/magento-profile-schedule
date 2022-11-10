@@ -18,7 +18,7 @@ class MassActionModifier implements ModifierInterface
     /**
      * @inheritDoc
      */
-    public function modifyData(array $data)
+    public function modifyData(array $data): array
     {
         return $data;
     }
@@ -26,7 +26,7 @@ class MassActionModifier implements ModifierInterface
     /**
      * @inheritDoc
      */
-    public function modifyMeta(array $meta)
+    public function modifyMeta(array $meta): array
     {
         return $meta;
     }

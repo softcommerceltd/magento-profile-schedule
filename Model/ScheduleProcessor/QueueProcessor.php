@@ -19,7 +19,7 @@ abstract class QueueProcessor implements QueueProcessorInterface
     /**
      * @var MessageStorageInterface
      */
-    protected $messageStorage;
+    protected MessageStorageInterface $messageStorage;
 
     /**
      * @param MessageStorageInterfaceFactory $messageStorageFactory

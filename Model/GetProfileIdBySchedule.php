@@ -21,17 +21,17 @@ class GetProfileIdBySchedule implements GetProfileIdByScheduleInterface
     /**
      * @var array
      */
-    private $data;
+    private array $data = [];
 
     /**
      * @var GetProfileDataByTypeIdInterface
      */
-    private $getProfileDataByTypeId;
+    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
 
     /**
      * @var ScheduleConfigInterface
      */
-    private $scheduleConfig;
+    private ScheduleConfigInterface $scheduleConfig;
 
     /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId

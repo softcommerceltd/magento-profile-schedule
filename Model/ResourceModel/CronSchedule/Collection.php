@@ -33,7 +33,7 @@ class Collection extends CronScheduleCollection
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     /**
      * @param RequestInterface $request

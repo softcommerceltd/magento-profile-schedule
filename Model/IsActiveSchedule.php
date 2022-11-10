@@ -19,12 +19,12 @@ class IsActiveSchedule implements IsActiveScheduleInterface
     /**
      * @var array
      */
-    private $data;
+    private array $data = [];
 
     /**
      * @var ResourceModel\Schedule
      */
-    private $resource;
+    private ResourceModel\Schedule $resource;
 
     /**
      * @param ResourceModel\Schedule $resource

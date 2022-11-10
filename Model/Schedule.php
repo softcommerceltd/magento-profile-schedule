@@ -19,17 +19,17 @@ use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 class Schedule extends AbstractModel implements ScheduleInterface, IdentityInterface
 {
     /**
-     * @inheritDoc
+     * @var string
      */
-    const CACHE_TAG = 'softcommerce_profile_schedule';
+    private const CACHE_TAG = 'softcommerce_profile_schedule';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_cacheTag = 'softcommerce_profile_schedule';
 
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_eventPrefix = 'softcommerce_profile_schedule';
 

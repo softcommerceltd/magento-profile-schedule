@@ -17,14 +17,14 @@ use SoftCommerce\ProfileSchedule\Model\ResourceModel;
 class GetScheduleData implements GetScheduleDataInterface
 {
     /**
-     * @var array
+     * @var array|null
      */
-    private $data;
+    private ?array $data = null;
 
     /**
      * @var ResourceModel\Schedule
      */
-    private $resource;
+    private ResourceModel\Schedule $resource;
 
     /**
      * @param ResourceModel\Schedule $resource

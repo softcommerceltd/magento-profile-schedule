@@ -25,7 +25,7 @@ class CronStatus implements OptionSourceInterface
     /**
      * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         $options = [];
         foreach ($this->getOptions() as $value => $label) {

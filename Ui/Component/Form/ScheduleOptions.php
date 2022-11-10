@@ -21,17 +21,17 @@ class ScheduleOptions implements OptionSourceInterface
     /**
      * @var GetScheduleDataInterface
      */
-    private $getScheduleData;
+    private GetScheduleDataInterface $getScheduleData;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $options;
+    private ?array $options = null;
 
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     /**
      * @param GetScheduleDataInterface $getScheduleData
@@ -50,21 +50,19 @@ class ScheduleOptions implements OptionSourceInterface
      */
     public function toOptionArray(): array
     {
-        if (null !== $this->options) {
-            return $this->options;
-        }
+        if (null === $this->options) {
+            $this->options = [];
+            $scheduleData = $this->getScheduleData->execute();
+            if ($typeId = $this->request->getParam(ScheduleInterface::TYPE_ID)) {
+                $scheduleData = $this->getScheduleData->applySearchCriteria(ScheduleInterface::TYPE_ID, $typeId);
+            }
 
-        $this->options = [];
-        $scheduleData = $this->getScheduleData->execute();
-        if ($typeId = $this->request->getParam(ScheduleInterface::TYPE_ID)) {
-            $scheduleData = $this->getScheduleData->applySearchCriteria(ScheduleInterface::TYPE_ID, $typeId);
-        }
-
-        foreach ($scheduleData as $item) {
-            $this->options[] = [
-                'value' => $item[ScheduleInterface::ENTITY_ID],
-                'label' => $item[ScheduleInterface::NAME]
-            ];
+            foreach ($scheduleData as $item) {
+                $this->options[] = [
+                    'value' => $item[ScheduleInterface::ENTITY_ID],
+                    'label' => $item[ScheduleInterface::NAME]
+                ];
+            }
         }
 
         return $this->options;

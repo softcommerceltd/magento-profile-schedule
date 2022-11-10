@@ -19,7 +19,7 @@ class Pool
     /**
      * @var ObjectManagerInterface
      */
-    private $objectManager;
+    private ObjectManagerInterface $objectManager;
 
     /**
      * @param ObjectManagerInterface $objectManager

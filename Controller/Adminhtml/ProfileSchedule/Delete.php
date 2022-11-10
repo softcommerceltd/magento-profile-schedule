@@ -30,7 +30,7 @@ class Delete extends Action implements HttpPostActionInterface
     /**
      * @var ScheduleRepositoryInterface
      */
-    private $scheduleRepository;
+    private ScheduleRepositoryInterface $scheduleRepository;
 
     /**
      * @param ScheduleRepositoryInterface $scheduleRepository

@@ -30,7 +30,7 @@ class InlineEdit extends Action implements HttpPostActionInterface
     /**
      * @var Schedule
      */
-    private $resource;
+    private Schedule $resource;
 
     /**
      * @param Schedule $resource

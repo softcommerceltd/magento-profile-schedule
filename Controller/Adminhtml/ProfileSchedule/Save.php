@@ -43,47 +43,47 @@ class Save extends Action implements HttpPostActionInterface
     /**
      * @var ConfigScopeWriterInterface
      */
-    private $configScopeWriter;
+    private ConfigScopeWriterInterface $configScopeWriter;
 
     /**
      * @var GetProfileIdByScheduleInterface
      */
-    private $getProfileIdBySchedule;
+    private GetProfileIdByScheduleInterface $getProfileIdBySchedule;
 
     /**
-     * @var ScheduleInterface
+     * @var ScheduleInterface|null
      */
-    private $model;
+    private ?ScheduleInterface $model = null;
 
     /**
      * @var ScheduleFactory
      */
-    private $modelFactory;
+    private ScheduleFactory $modelFactory;
 
     /**
      * @var LayoutFactory
      */
-    private $layoutFactory;
+    private LayoutFactory $layoutFactory;
 
     /**
      * @var ReinitableConfigInterface
      */
-    private $reinitableConfig;
+    private ReinitableConfigInterface $reinitableConfig;
 
     /**
      * @var ScheduleRepositoryInterface
      */
-    private $repository;
+    private ScheduleRepositoryInterface $repository;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    private $typeInstanceOptions;
+    private TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @var WriterInterface
      */
-    private $configWriter;
+    private WriterInterface $configWriter;
 
     /**
      * @param ConfigScopeWriterInterface $configScopeWriter

@@ -27,12 +27,12 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
     /**
      * @var PoolInterface
      */
-    private $pool;
+    private PoolInterface $pool;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    private $typeInstanceOptions;
+    private TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param CollectionFactory $collectionFactory
@@ -109,7 +109,7 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
     }
 
     /**
-     * @return AbstractCollection
+     * @@inheritDoc
      */
     public function getCollection(): AbstractCollection
     {

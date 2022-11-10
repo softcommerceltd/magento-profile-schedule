@@ -31,49 +31,44 @@ abstract class ProfileSchedule extends Action
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
-     * @var string
+     * @var ProfileInterface|null
      */
-    const PROFILE_BASE_URL = 'softcommerce/profileSchedule';
-
-    /**
-     * @var ProfileInterface
-     */
-    protected $currentProfile;
+    protected ?ProfileInterface $currentProfile = null;
 
     /**
      * @var Registry
      */
-    protected $coreRegistry;
+    protected Registry $coreRegistry;
 
     /**
      * @var ProfileFactory
      */
-    protected $profileFactory;
+    protected ProfileFactory $profileFactory;
 
     /**
      * @var ProfileRepositoryInterface
      */
-    protected $profileRepository;
+    protected ProfileRepositoryInterface $profileRepository;
 
     /**
      * @var LayoutFactory
      */
-    protected $resultLayoutFactory;
+    protected LayoutFactory $resultLayoutFactory;
 
     /**
      * @var PageFactory
      */
-    protected $resultPageFactory;
+    protected PageFactory $resultPageFactory;
 
     /**
      * @var JsonFactory
      */
-    protected $resultJsonFactory;
+    protected JsonFactory $resultJsonFactory;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    protected $typeInstanceOptions;
+    protected TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param Registry $coreRegistry
@@ -108,7 +103,7 @@ abstract class ProfileSchedule extends Action
     /**
      * @return ProfileInterface
      */
-    protected function initCurrentProfile()
+    protected function initCurrentProfile(): ProfileInterface
     {
         $this->currentProfile = $this->profileFactory->create();
 

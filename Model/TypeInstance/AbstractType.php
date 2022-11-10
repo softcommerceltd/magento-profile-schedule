@@ -8,24 +8,10 @@ declare(strict_types=1);
 
 namespace SoftCommerce\ProfileSchedule\Model\TypeInstance;
 
-use SoftCommerce\Core\Framework\MessageStorageInterface;
-
 /**
  * Class AbstractType
+ * @deprecated
  */
 abstract class AbstractType
 {
-    private $data;
-
-    protected $messageStorage;
-
-    public function __construct(
-        MessageStorageInterface $messageStorage,
-        array $data = []
-    ) {
-        $this->messageStorage = $messageStorage;
-        $this->data = $data;
-    }
-
-
 }

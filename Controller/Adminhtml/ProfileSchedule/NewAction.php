@@ -26,7 +26,7 @@ class NewAction extends Action implements HttpGetActionInterface
     /**
      * @var ForwardFactory
      */
-    private $resultForwardFactory;
+    private ForwardFactory $resultForwardFactory;
 
     /**
      * @param ForwardFactory $resultForwardFactory

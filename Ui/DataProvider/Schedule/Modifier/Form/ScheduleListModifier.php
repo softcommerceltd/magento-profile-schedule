@@ -24,12 +24,12 @@ class ScheduleListModifier implements ModifierInterface
     /**
      * @var MetadataPoolInterface
      */
-    private $metadataPool;
+    private MetadataPoolInterface $metadataPool;
 
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     /**
      * @param MetadataPoolInterface $metadataPool
@@ -44,20 +44,17 @@ class ScheduleListModifier implements ModifierInterface
     }
 
     /**
-     * @param array $data
-     * @return array
+     * @inheritDoc
      */
-    public function modifyData(array $data)
+    public function modifyData(array $data): array
     {
         return $data;
     }
 
     /**
-     * @param array $meta
-     * @return array
-     * @throws \Exception
+     * @inheritDoc
      */
-    public function modifyMeta(array $meta)
+    public function modifyMeta(array $meta): array
     {
         if (!$this->canIncludeListing()) {
             return $meta;

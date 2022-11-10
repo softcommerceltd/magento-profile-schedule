@@ -22,7 +22,7 @@ class MassDelete extends AbstractMassAction
     /**
      * @var ResourceConnection
      */
-    private $resourceConnection;
+    private ResourceConnection $resourceConnection;
 
     /**
      * @param ResourceConnection $resourceConnection
