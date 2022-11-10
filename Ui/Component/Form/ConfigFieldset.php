@@ -17,7 +17,7 @@ use Magento\Ui\Component\Form\Fieldset;
 class ConfigFieldset extends Fieldset implements ComponentVisibilityInterface
 {
     /**
-     * @return bool
+     * @inheritDoc
      */
     public function isComponentVisible(): bool
     {

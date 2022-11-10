@@ -22,7 +22,7 @@ class MassStatus extends AbstractMassAction implements HttpPostActionInterface
     /**
      * @var ResourceModel\Schedule
      */
-    private $resource;
+    private ResourceModel\Schedule $resource;
 
     /**
      * @param ResourceModel\Schedule $resource

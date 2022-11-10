@@ -21,7 +21,7 @@ class Version extends Field
     /**
      * @var PackageInfo
      */
-    private $packageInfo;
+    private PackageInfo $packageInfo;
 
     /**
      * @param PackageInfo $packageInfo

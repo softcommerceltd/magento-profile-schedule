@@ -31,32 +31,32 @@ class ScheduleRepository implements ScheduleRepositoryInterface
     /**
      * @var ResourceModel\Schedule
      */
-    private $resource;
+    private ResourceModel\Schedule $resource;
 
     /**
      * @var ScheduleFactory
      */
-    private $modelFactory;
+    private ScheduleFactory $modelFactory;
 
     /**
      * @var ResourceModel\Schedule\CollectionFactory
      */
-    private $collectionFactory;
+    private ResourceModel\Schedule\CollectionFactory $collectionFactory;
 
     /**
      * @var ScheduleSearchResultsInterfaceFactory
      */
-    private $searchResultsFactory;
+    private ScheduleSearchResultsInterfaceFactory $searchResultsFactory;
 
     /**
      * @var SearchCriteriaBuilder
      */
-    private $searchCriteriaBuilder;
+    private SearchCriteriaBuilder $searchCriteriaBuilder;
 
     /**
      * @var CollectionProcessorInterface
      */
-    private $collectionProcessor;
+    private CollectionProcessorInterface $collectionProcessor;
 
     /**
      * @param ResourceModel\Schedule $resource

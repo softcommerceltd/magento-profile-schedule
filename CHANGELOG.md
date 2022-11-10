@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.2.8
+- **Compatibility**: Compatibility with Magento [OS/AC] 2.4.5 and PHP 8.
+
 ### Version 1.2.7
 - **Enhancement**: Added profile type ID filter to cron_schedule collection.
 

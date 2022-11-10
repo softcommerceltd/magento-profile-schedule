@@ -19,7 +19,7 @@ use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 class Schedule extends AbstractResource
 {
     /**
-     * @inheritDoc
+     * @var string
      */
     protected $_useIsObjectNew = true;
 

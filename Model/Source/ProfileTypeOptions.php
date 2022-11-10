@@ -22,22 +22,22 @@ class ProfileTypeOptions implements OptionSourceInterface
     /**
      * @var GetScheduleDataInterface
      */
-    private $getScheduleData;
+    private GetScheduleDataInterface $getScheduleData;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $options;
+    private ?array $options = null;
 
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     /**
      * @var TypeInstanceOptionsInterface
      */
-    private $typeInstanceOptions;
+    private TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param GetScheduleDataInterface $getScheduleData
@@ -55,9 +55,9 @@ class ProfileTypeOptions implements OptionSourceInterface
     }
 
     /**
-     * @return array
+     * @inheritDoc
      */
-    public function toOptionArray()
+    public function toOptionArray(): ?array
     {
         if (null !== $this->options) {
             return $this->options;

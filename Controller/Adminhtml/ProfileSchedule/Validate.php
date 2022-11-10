@@ -12,11 +12,9 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
 use Magento\Framework\App\Action\HttpPostActionInterface;
-use Magento\Framework\Controller\Result\Json;
 use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\DataObject;
 use Magento\Framework\DataObjectFactory;
-use Magento\Framework\Exception\CronException;
 use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 use SoftCommerce\ProfileSchedule\Model\Schedule\CronExpressionValidatorInterface;
@@ -29,17 +27,17 @@ class Validate extends Action implements HttpPostActionInterface, HttpGetActionI
     /**
      * @var CronExpressionValidatorInterface
      */
-    private $cronExpressionValidator;
+    private CronExpressionValidatorInterface $cronExpressionValidator;
 
     /**
      * @var DataObjectFactory
      */
-    private $dataObjectFactory;
+    private DataObjectFactory $dataObjectFactory;
 
     /**
      * @var JsonFactory
      */
-    private $resultJsonFactory;
+    private JsonFactory $resultJsonFactory;
 
     /**
      * @param CronExpressionValidatorInterface $cronExpressionValidator
@@ -60,7 +58,7 @@ class Validate extends Action implements HttpPostActionInterface, HttpGetActionI
     }
 
     /**
-     * @return Json
+     * @inheritDoc
      */
     public function execute()
     {

@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Ui\DataProvider\Schedule\Modifier\Form;
 
 use Magento\Framework\App\RequestInterface;
-use Magento\Framework\Exception\LocalizedException;
 use Magento\Ui\DataProvider\Modifier\ModifierInterface;
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 use SoftCommerce\ProfileSchedule\Model\GetProfileIdByScheduleInterface;
@@ -25,12 +24,12 @@ class ProfileAssignmentModifier implements ModifierInterface
     /**
      * @var GetProfileIdByScheduleInterface
      */
-    private $getProfileIdBySchedule;
+    private GetProfileIdByScheduleInterface $getProfileIdBySchedule;
 
     /**
      * @var RequestInterface
      */
-    private $request;
+    private RequestInterface $request;
 
     /**
      * @param GetProfileIdByScheduleInterface $getProfileIdBySchedule
@@ -46,16 +45,20 @@ class ProfileAssignmentModifier implements ModifierInterface
 
     /**
      * @inheritDoc
-     * @throws LocalizedException
      */
-    public function modifyData(array $data)
+    public function modifyData(array $data): array
     {
         foreach ($data as $scheduleId => $item) {
             if (!$typeId = $item['general'][ScheduleInterface::TYPE_ID] ?? null) {
                 continue;
             }
 
-            $profileData = $this->getProfileIdBySchedule->execute($typeId, (int) $scheduleId);
+            try {
+                $profileData = $this->getProfileIdBySchedule->execute($typeId, (int) $scheduleId);
+            } catch (\Exception $e) {
+                $profileData = [];
+            }
+
             if ($profileIds = array_column($profileData, GetProfileIdByScheduleInterface::PROFILE_ID)) {
                 $data[$scheduleId][self::DATA_SOURCE][self::DATA_COMPONENT] = $profileIds;
             }
@@ -67,7 +70,7 @@ class ProfileAssignmentModifier implements ModifierInterface
     /**
      * @inheritDoc
      */
-    public function modifyMeta(array $meta)
+    public function modifyMeta(array $meta): array
     {
         if (!$this->canHideProfileFieldset()) {
             return $meta;

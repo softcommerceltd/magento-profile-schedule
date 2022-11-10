@@ -25,7 +25,7 @@ class Popup extends Widget
     /**
      * @var SerializerInterface
      */
-    private $serializer;
+    private SerializerInterface $serializer;
 
     /**
      * @param Context $context

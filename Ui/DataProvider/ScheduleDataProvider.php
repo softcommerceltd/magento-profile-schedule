@@ -23,12 +23,12 @@ class ScheduleDataProvider extends AbstractDataProvider
     /**
      * @var PoolInterface
      */
-    private $pool;
+    private PoolInterface $pool;
 
     /**
-     * @var array
+     * @var array|null
      */
-    private $loadedData;
+    private ?array $loadedData = null;
 
     /**
      * @param CollectionFactory $collectionFactory
@@ -54,7 +54,7 @@ class ScheduleDataProvider extends AbstractDataProvider
     }
 
     /**
-     * @return array
+     * @inheritDoc
      * @throws LocalizedException
      */
     public function getData(): array
@@ -82,7 +82,7 @@ class ScheduleDataProvider extends AbstractDataProvider
     /**
      * @inheritDoc
      */
-    public function getMeta()
+    public function getMeta(): array
     {
         $meta = parent::getMeta();
         foreach ($this->pool->getModifiersInstances() as $modifier) {

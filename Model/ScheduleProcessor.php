@@ -27,42 +27,42 @@ class ScheduleProcessor implements ScheduleProcessorInterface
     /**
      * @var GetProfileDataByTypeIdInterface
      */
-    private $getProfileDataByTypeId;
+    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
 
     /**
      * @var HistoryManagementInterface
      */
-    private $historyManagement;
+    private HistoryManagementInterface $historyManagement;
 
     /**
      * @var IsActiveScheduleInterface
      */
-    private $isActiveSchedule;
+    private IsActiveScheduleInterface $isActiveSchedule;
 
     /**
      * @var LogProcessorInterface
      */
-    private $logger;
+    private LogProcessorInterface $logger;
 
     /**
-     * @var ScheduleConfigInterface[]|null
+     * @var ScheduleConfigInterface[]
      */
-    private $scheduleConfig;
+    private array $scheduleConfig = [];
 
     /**
      * @var ScheduleConfigInterfaceFactory
      */
-    private $scheduleConfigFactory;
+    private ScheduleConfigInterfaceFactory $scheduleConfigFactory;
 
     /**
      * @var StatusPredictionInterface
      */
-    private $statusPrediction;
+    private StatusPredictionInterface $statusPrediction;
 
     /**
      * @var ScheduleProcessor\QueueProcessorInterface[]
      */
-    private $queues;
+    private array $queues;
 
     /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId
