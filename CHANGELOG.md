@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.0
+- **Fix**: Applied a fix to composer.json license compatibility.
+
 ### Version 1.2.9
 - **Enhancement**: Moved mass status action for schedules from `SoftCommerce_Profile` to `SoftCommerce_ProfileSchedule`
 
