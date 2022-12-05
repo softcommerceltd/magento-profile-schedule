@@ -1,5 +1,11 @@
 ## Changelog
 
+### Version 1.3.0
+- **Fix**: Applied a fix to composer.json license compatibility.
+
+### Version 1.2.9
+- **Enhancement**: Moved mass status action for schedules from `SoftCommerce_Profile` to `SoftCommerce_ProfileSchedule`
+
 ### Version 1.2.8
 - **Compatibility**: Compatibility with Magento [OS/AC] 2.4.5 and PHP 8.
 
