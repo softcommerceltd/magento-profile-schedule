@@ -12,7 +12,7 @@ use Magento\Framework\Exception\LocalizedException;
 use SoftCommerce\Core\Framework\MessageStorage\StatusPredictionInterface;
 use SoftCommerce\Core\Framework\MessageStorageInterface;
 use SoftCommerce\Core\Logger\LogProcessorInterface;
-use SoftCommerce\Core\Model\Source\Status;
+use SoftCommerce\Core\Model\Source\StatusInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
 use SoftCommerce\Profile\Model\GetProfileDataByTypeIdInterface;
 use SoftCommerce\ProfileHistory\Api\HistoryManagementInterface;
@@ -106,8 +106,8 @@ class ScheduleProcessor implements ScheduleProcessorInterface
             $this->processQueue($profileId);
         } catch (\Exception $e) {
             $message = $this->buildErrorMessage($typeId, $e->getMessage());
-            $this->processHistory($profileId, $typeId, $message, Status::ERROR);
-            $this->logger->execute(Status::ERROR, $message);
+            $this->processHistory($profileId, $typeId, $message, StatusInterface::ERROR);
+            $this->logger->execute(StatusInterface::ERROR, $message);
         }
     }
 
@@ -124,7 +124,7 @@ class ScheduleProcessor implements ScheduleProcessorInterface
                 $response = $response->getData();
             } catch (\Exception $e) {
                 $response = $this->buildErrorMessage($taskCode, $e->getMessage());
-                $this->logger->execute(Status::ERROR, $response);
+                $this->logger->execute(StatusInterface::ERROR, $response);
             }
 
             $this->processHistory($profileId, $taskCode, $response);
@@ -166,7 +166,7 @@ class ScheduleProcessor implements ScheduleProcessorInterface
     {
         return [
             MessageStorageInterface::ENTITY => $taskCode,
-            MessageStorageInterface::STATUS => Status::ERROR,
+            MessageStorageInterface::STATUS => StatusInterface::ERROR,
             MessageStorageInterface::MESSAGE => $message
         ];
     }

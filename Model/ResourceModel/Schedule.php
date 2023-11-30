@@ -9,8 +9,8 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Model\ResourceModel;
 
 use Magento\Framework\Exception\LocalizedException;
-use SoftCommerce\Core\Model\Source\Status;
 use SoftCommerce\Core\Model\ResourceModel\AbstractResource;
+use SoftCommerce\Core\Model\Source\StatusInterface;
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 
 /**
@@ -53,7 +53,7 @@ class Schedule extends AbstractResource
     {
         $connection = $this->getConnection();
         $select = $connection->select()->from($this->getMainTable())
-            ->where(ScheduleInterface::STATUS.' = ?', Status::PENDING);
+            ->where(ScheduleInterface::STATUS.' = ?', StatusInterface::PENDING);
         return $connection->fetchAll($select);
     }
 
