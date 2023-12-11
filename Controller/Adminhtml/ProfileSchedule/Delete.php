@@ -12,7 +12,10 @@ use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Backend\Model\View\Result\Redirect;
 use Magento\Framework\App\Action\HttpPostActionInterface;
+use Magento\Framework\App\Config\Storage\WriterInterface;
 use Magento\Framework\Controller\ResultInterface;
+use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
+use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 use SoftCommerce\ProfileSchedule\Api\ScheduleRepositoryInterface;
 
 /**
@@ -28,19 +31,35 @@ class Delete extends Action implements HttpPostActionInterface
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
+     * @var WriterInterface
+     */
+    private WriterInterface $configWriter;
+
+    /**
      * @var ScheduleRepositoryInterface
      */
     private ScheduleRepositoryInterface $scheduleRepository;
 
     /**
+     * @var TypeInstanceOptionsInterface
+     */
+    private TypeInstanceOptionsInterface $typeInstanceOptions;
+
+    /**
+     * @param WriterInterface $configWriter
      * @param ScheduleRepositoryInterface $scheduleRepository
+     * @param TypeInstanceOptionsInterface $typeInstanceOptions
      * @param Context $context
      */
     public function __construct(
+        WriterInterface $configWriter,
         ScheduleRepositoryInterface $scheduleRepository,
+        TypeInstanceOptionsInterface $typeInstanceOptions,
         Context $context
     ) {
+        $this->configWriter = $configWriter;
         $this->scheduleRepository = $scheduleRepository;
+        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($context);
     }
 
@@ -59,7 +78,9 @@ class Delete extends Action implements HttpPostActionInterface
 
         if ($id = $this->getRequest()->getParam('id')) {
             try {
-                $this->scheduleRepository->deleteById($id);
+                $model = $this->scheduleRepository->get($id);
+                $this->processCrontabDelete($model);
+                $this->scheduleRepository->delete($model);
                 $this->messageManager->addSuccessMessage(__('The schedule with ID %1 has been deleted.', $id));
             } catch (\Exception $e) {
                 $this->messageManager->addErrorMessage($e->getMessage());
@@ -69,6 +90,22 @@ class Delete extends Action implements HttpPostActionInterface
         }
 
         return $resultRedirect->setPath('*/*/');
+    }
+
+    /**
+     * @param ScheduleInterface $model
+     * @return void
+     */
+    private function processCrontabDelete(ScheduleInterface $model): void
+    {
+        $typeId = $model->getTypeId();
+        if (!$typeId || !$cronGroup = $this->typeInstanceOptions->getCronGroupByTypeId($typeId)) {
+            return;
+        }
+
+        $this->configWriter->delete(
+            sprintf(ScheduleInterface::CRON_SCHEDULE_PATH, $cronGroup, $typeId)
+        );
     }
 
     /**

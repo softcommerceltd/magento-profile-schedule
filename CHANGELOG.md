@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.3
+- **Fix**: No callbacks found for cron job plenty_customer_export. [#1]
+
 ### Version 1.3.2
 - **Compatibility**: Add compatibility for Magento 2.4.6-p3 and Magento 2.4.7
 

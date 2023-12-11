@@ -23,6 +23,8 @@ interface ScheduleInterface
     public const CRON_EXPRESSION = 'cron_expression';
     public const UPDATED_AT = 'updated_at';
 
+    public const CRON_SCHEDULE_PATH = 'crontab/%s/jobs/%s/schedule/cron_expr';
+
     /**
      * @return int
      */

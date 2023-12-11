@@ -38,8 +38,6 @@ class Save extends Action implements HttpPostActionInterface
      */
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
-    private const CRON_SCHEDULE_PATH = 'crontab/%s/jobs/%s/schedule/cron_expr';
-
     /**
      * @var ConfigScopeWriterInterface
      */
@@ -187,7 +185,7 @@ class Save extends Action implements HttpPostActionInterface
         }
 
         $this->configWriter->save(
-            sprintf(self::CRON_SCHEDULE_PATH, $cronGroup, $typeId),
+            sprintf(ScheduleInterface::CRON_SCHEDULE_PATH, $cronGroup, $typeId),
             $cronExpression
         );
 
