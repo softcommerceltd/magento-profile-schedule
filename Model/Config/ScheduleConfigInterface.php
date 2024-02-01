@@ -25,6 +25,12 @@ interface ScheduleConfigInterface extends ConfigInterface
     public const XML_PATH_PROCESS_BATCH_SIZE = '/schedule_config/process_batch_size';
     public const XML_PATH_RETRY_ON_ERROR = '/schedule_config/retry_on_error';
     public const XML_PATH_ENABLE_HISTORY = '/schedule_config/enable_history';
+    public const XML_PATH_ENABLE_1TIME_FULL_PROCESS = '/schedule_config/enable_onetime_full_process';
+    public const XML_PATH_1TIME_FULL_PROCESS_FREQUENCY = '/schedule_config/onetime_full_process_frequency';
+    public const XML_PATH_1TIME_FULL_PROCESS_TIME = '/schedule_config/onetime_full_process_time';
+
+    // Cache Keys
+    public const CACHE_KEY_ONETIME_PROCESS = 'softcommerce_profile_schedule_onetime_process';
 
     /**
      * @return bool
@@ -55,4 +61,43 @@ interface ScheduleConfigInterface extends ConfigInterface
      * @throws LocalizedException
      */
     public function shouldRetryOnError(): bool;
+
+    /**
+     * @return bool
+     * @throws LocalizedException
+     */
+    public function isActiveOnetimeProcess(): bool;
+
+    /**
+     * @return string|null
+     * @throws LocalizedException
+     */
+    public function getOnetimeProcessFrequency(): ?string;
+
+    /**
+     * @param string|null $metadata
+     * @return array|string|bool|null
+     * @throws LocalizedException
+     */
+    public function getOnetimeProcessInstructions(?string $metadata = null): array|string|bool|null;
+
+    /**
+     * @param string $timestamp
+     * @param bool $canProcessFlag
+     * @return void
+     * @throws LocalizedException
+     */
+    public function saveOnetimeProcessInstructions(string $timestamp, bool $canProcessFlag = false): void;
+
+    /**
+     * @return string|null
+     * @throws LocalizedException
+     */
+    public function getOnetimeProcessNextTimestamp(): ?string;
+
+    /**
+     * @return bool
+     * @throws LocalizedException
+     */
+    public function canRunOnetimeProcess(): bool;
 }

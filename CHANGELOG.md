@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.4
+- **Feature**: Introduce onetime schedule to run at specified times as part of cron job process. [#2]
+
 ### Version 1.3.3
 - **Fix**: No callbacks found for cron job plenty_customer_export. [#1]
 
