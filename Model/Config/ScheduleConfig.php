@@ -12,6 +12,7 @@ use Magento\Cron\Model\Config\Source\Frequency;
 use Magento\Framework\App\CacheInterface;
 use Magento\Framework\Data\CollectionFactory;
 use Magento\Framework\DataObjectFactory;
+use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use SoftCommerce\Core\Framework\DataStorageInterfaceFactory;
@@ -152,7 +153,7 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
 
         try {
             $this->dataInMemory[__FUNCTION__] = $this->serializer->unserialize(
-                $this->cache->load(self::CACHE_KEY_ONETIME_PROCESS) ?: ''
+                $this->cache->load($this->getCacheKeyOnetimeProcessIdentifier()) ?: ''
             );
         } catch (\InvalidArgumentException) {
             $this->dataInMemory[__FUNCTION__] = [
@@ -218,9 +219,9 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
 
         $this->cache->save(
             $data,
-            self::CACHE_KEY_ONETIME_PROCESS,
+            $this->getCacheKeyOnetimeProcessIdentifier(),
             [
-                self::CACHE_KEY_ONETIME_PROCESS . '_' . $this->getProfileId()
+                self::CACHE_KEY_ONETIME_PROCESS
             ]
         );
     }
@@ -278,5 +279,14 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
         }
 
         return $scheduleTimestamp === $currentTimestamp && $canProcess;
+    }
+
+    /**
+     * @return string
+     * @throws LocalizedException
+     */
+    private function getCacheKeyOnetimeProcessIdentifier(): string
+    {
+        return self::CACHE_KEY_ONETIME_PROCESS . '_' . $this->getProfileId();
     }
 }

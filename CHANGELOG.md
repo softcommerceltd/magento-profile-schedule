@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.5
+- **Fix**: Fix onetime schedule cache identifier [#3]
+
 ### Version 1.3.4
 - **Feature**: Introduce onetime schedule to run at specified times as part of cron job process. [#2]
 
