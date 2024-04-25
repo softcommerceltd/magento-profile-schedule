@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.6
+- **Compatibility**: Introduced support for PHP 8.3
+
 ### Version 1.3.5
 - **Fix**: Fix onetime schedule cache identifier [#3]
 
