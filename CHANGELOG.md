@@ -1,5 +1,8 @@
 ## Changelog
 
+### Version 1.3.7
+- **Enhancement**: Included `servicepoint` type to account for `pakshop` facility.
+
 ### Version 1.3.6
 - **Compatibility**: Introduced support for PHP 8.3
 
