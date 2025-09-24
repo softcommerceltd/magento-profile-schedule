@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Model\Config;
 
 use Magento\Framework\Exception\LocalizedException;
-use SoftCommerce\ProfileConfig\Model\ConfigInterface;
+use SoftCommerce\Profile\Model\Config\ConfigInterface;
 
 /**
  * Interface ScheduleConfigInterface used to provide

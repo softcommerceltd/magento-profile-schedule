@@ -25,44 +25,9 @@ use SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfigInterfaceFactory;
 class ScheduleProcessor implements ScheduleProcessorInterface
 {
     /**
-     * @var GetProfileDataByTypeIdInterface
-     */
-    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
-
-    /**
-     * @var HistoryManagementInterface
-     */
-    private HistoryManagementInterface $historyManagement;
-
-    /**
-     * @var IsActiveScheduleInterface
-     */
-    private IsActiveScheduleInterface $isActiveSchedule;
-
-    /**
-     * @var LogProcessorInterface
-     */
-    private LogProcessorInterface $logger;
-
-    /**
      * @var ScheduleConfigInterface[]
      */
     private array $scheduleConfig = [];
-
-    /**
-     * @var ScheduleConfigInterfaceFactory
-     */
-    private ScheduleConfigInterfaceFactory $scheduleConfigFactory;
-
-    /**
-     * @var StatusPredictionInterface
-     */
-    private StatusPredictionInterface $statusPrediction;
-
-    /**
-     * @var ScheduleProcessor\QueueProcessorInterface[]
-     */
-    private array $queues;
 
     /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId
@@ -74,22 +39,14 @@ class ScheduleProcessor implements ScheduleProcessorInterface
      * @param array $queues
      */
     public function __construct(
-        GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
-        HistoryManagementInterface $historyManagement,
-        IsActiveScheduleInterface $isActiveSchedule,
-        LogProcessorInterface $logger,
-        ScheduleConfigInterfaceFactory $scheduleConfigFactory,
-        StatusPredictionInterface $statusPrediction,
-        array $queues = []
-    ) {
-        $this->getProfileDataByTypeId = $getProfileDataByTypeId;
-        $this->historyManagement = $historyManagement;
-        $this->isActiveSchedule = $isActiveSchedule;
-        $this->logger = $logger;
-        $this->scheduleConfigFactory = $scheduleConfigFactory;
-        $this->statusPrediction = $statusPrediction;
-        $this->queues = $queues;
-    }
+        private GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
+        private HistoryManagementInterface $historyManagement,
+        private IsActiveScheduleInterface $isActiveSchedule,
+        private LogProcessorInterface $logger,
+        private ScheduleConfigInterfaceFactory $scheduleConfigFactory,
+        private StatusPredictionInterface $statusPrediction,
+        private array $queues = []
+    ) {}
 
     /**
      * @inheritDoc
