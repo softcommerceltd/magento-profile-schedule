@@ -25,35 +25,17 @@ use SoftCommerce\ProfileSchedule\Model\Schedule\CronExpressionValidatorInterface
 class Validate extends Action implements HttpPostActionInterface, HttpGetActionInterface
 {
     /**
-     * @var CronExpressionValidatorInterface
-     */
-    private CronExpressionValidatorInterface $cronExpressionValidator;
-
-    /**
-     * @var DataObjectFactory
-     */
-    private DataObjectFactory $dataObjectFactory;
-
-    /**
-     * @var JsonFactory
-     */
-    private JsonFactory $resultJsonFactory;
-
-    /**
      * @param CronExpressionValidatorInterface $cronExpressionValidator
      * @param DataObjectFactory $dataObjectFactory
      * @param JsonFactory $jsonFactory
      * @param Context $context
      */
     public function __construct(
-        CronExpressionValidatorInterface $cronExpressionValidator,
-        DataObjectFactory $dataObjectFactory,
-        JsonFactory $jsonFactory,
+        private readonly CronExpressionValidatorInterface $cronExpressionValidator,
+        private readonly DataObjectFactory $dataObjectFactory,
+        private readonly JsonFactory $resultJsonFactory,
         Context $context
     ) {
-        $this->cronExpressionValidator = $cronExpressionValidator;
-        $this->dataObjectFactory = $dataObjectFactory;
-        $this->resultJsonFactory = $jsonFactory;
         parent::__construct($context);
     }
 

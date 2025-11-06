@@ -21,16 +21,11 @@ use SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfigInterface;
 class ProfileSaveAfterControllerAction implements ObserverInterface
 {
     /**
-     * @var CacheInterface
-     */
-    private CacheInterface $cache;
-
-    /**
      * @param CacheInterface $cache
      */
-    public function __construct(CacheInterface $cache)
-    {
-        $this->cache = $cache;
+    public function __construct(
+        private readonly CacheInterface $cache
+    ) {
     }
 
     /**

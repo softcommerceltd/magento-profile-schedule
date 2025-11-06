@@ -23,21 +23,15 @@ class Popup extends Widget
     protected $_template = 'SoftCommerce_ProfileSchedule::edit/popup.phtml';
 
     /**
-     * @var SerializerInterface
-     */
-    private SerializerInterface $serializer;
-
-    /**
      * @param Context $context
      * @param SerializerInterface $serializer
      * @param array $data
      */
     public function __construct(
         Context $context,
-        SerializerInterface $serializer,
+        private readonly SerializerInterface $serializer,
         array $data = []
     ) {
-        $this->serializer = $serializer;
         parent::__construct($context, $data);
     }
 

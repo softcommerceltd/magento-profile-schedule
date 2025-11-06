@@ -16,25 +16,15 @@ use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Serialize\SerializerInterface;
 use Magento\Framework\Stdlib\DateTime\DateTime;
 use SoftCommerce\Core\Framework\DataStorageInterfaceFactory;
+use SoftCommerce\Profile\Model\Config\ConfigModel;
+use SoftCommerce\Profile\Model\Config\ConfigScopeInterface;
 use SoftCommerce\Profile\Model\GetProfileTypeIdInterface;
-use SoftCommerce\ProfileConfig\Model\AbstractConfig;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeInterface;
 
 /**
  * @inheritDoc
  */
-class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
+class ScheduleConfig extends ConfigModel implements ScheduleConfigInterface
 {
-    /**
-     * @var CacheInterface
-     */
-    private CacheInterface $cache;
-
-    /**
-     * @var DateTime
-     */
-    private DateTime $dateTime;
-
     /**
      * @var array
      */
@@ -53,8 +43,8 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
      * @param int|null $profileId
      */
     public function __construct(
-        CacheInterface $cache,
-        DateTime $dateTime,
+        private readonly CacheInterface $cache,
+        private readonly DateTime $dateTime,
         ConfigScopeInterface $configScope,
         CollectionFactory $dataCollectionFactory,
         DataObjectFactory $dataObjectFactory,
@@ -64,8 +54,6 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
         array $data = [],
         ?int $profileId = null
     ) {
-        $this->cache = $cache;
-        $this->dateTime = $dateTime;
         parent::__construct(
             $configScope,
             $dataCollectionFactory,
@@ -108,6 +96,14 @@ class ScheduleConfig extends AbstractConfig implements ScheduleConfigInterface
     public function isActiveHistory(): bool
     {
         return (bool) $this->getConfig($this->getTypeId() . self::XML_PATH_ENABLE_HISTORY);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function isRetryOnFailureEnabled(): bool
+    {
+        return (bool) $this->getConfig($this->getTypeId() . self::XML_PATH_ENABLE_RETRY_ON_FAILURE);
     }
 
     /**

@@ -9,8 +9,6 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Model;
 
 use Magento\Framework\Exception\LocalizedException;
-use SoftCommerce\Core\Framework\MessageStorage\StatusPredictionInterface;
-use SoftCommerce\Core\Framework\MessageStorageInterface;
 use SoftCommerce\Core\Logger\LogProcessorInterface;
 use SoftCommerce\Core\Model\Source\StatusInterface;
 use SoftCommerce\Profile\Api\Data\ProfileInterface;
@@ -18,6 +16,7 @@ use SoftCommerce\Profile\Model\GetProfileDataByTypeIdInterface;
 use SoftCommerce\ProfileHistory\Api\HistoryManagementInterface;
 use SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfigInterface;
 use SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfigInterfaceFactory;
+use SoftCommerce\ProfileSchedule\Model\ScheduleProcessor\QueueProcessorInterface;
 
 /**
  * @inheritDoc
@@ -25,44 +24,9 @@ use SoftCommerce\ProfileSchedule\Model\Config\ScheduleConfigInterfaceFactory;
 class ScheduleProcessor implements ScheduleProcessorInterface
 {
     /**
-     * @var GetProfileDataByTypeIdInterface
-     */
-    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
-
-    /**
-     * @var HistoryManagementInterface
-     */
-    private HistoryManagementInterface $historyManagement;
-
-    /**
-     * @var IsActiveScheduleInterface
-     */
-    private IsActiveScheduleInterface $isActiveSchedule;
-
-    /**
-     * @var LogProcessorInterface
-     */
-    private LogProcessorInterface $logger;
-
-    /**
      * @var ScheduleConfigInterface[]
      */
     private array $scheduleConfig = [];
-
-    /**
-     * @var ScheduleConfigInterfaceFactory
-     */
-    private ScheduleConfigInterfaceFactory $scheduleConfigFactory;
-
-    /**
-     * @var StatusPredictionInterface
-     */
-    private StatusPredictionInterface $statusPrediction;
-
-    /**
-     * @var ScheduleProcessor\QueueProcessorInterface[]
-     */
-    private array $queues;
 
     /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId
@@ -70,35 +34,28 @@ class ScheduleProcessor implements ScheduleProcessorInterface
      * @param IsActiveScheduleInterface $isActiveSchedule
      * @param LogProcessorInterface $logger
      * @param ScheduleConfigInterfaceFactory $scheduleConfigFactory
-     * @param StatusPredictionInterface $statusPrediction
-     * @param array $queues
+     * @param QueueProcessorInterface[] $queues
      */
     public function __construct(
-        GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
-        HistoryManagementInterface $historyManagement,
-        IsActiveScheduleInterface $isActiveSchedule,
-        LogProcessorInterface $logger,
-        ScheduleConfigInterfaceFactory $scheduleConfigFactory,
-        StatusPredictionInterface $statusPrediction,
-        array $queues = []
-    ) {
-        $this->getProfileDataByTypeId = $getProfileDataByTypeId;
-        $this->historyManagement = $historyManagement;
-        $this->isActiveSchedule = $isActiveSchedule;
-        $this->logger = $logger;
-        $this->scheduleConfigFactory = $scheduleConfigFactory;
-        $this->statusPrediction = $statusPrediction;
-        $this->queues = $queues;
-    }
+        private readonly GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
+        private readonly HistoryManagementInterface $historyManagement,
+        private readonly IsActiveScheduleInterface $isActiveSchedule,
+        private readonly LogProcessorInterface $logger,
+        private readonly ScheduleConfigInterfaceFactory $scheduleConfigFactory,
+        private array $queues = []
+    ) {}
 
     /**
      * @inheritDoc
      */
     public function execute(string $typeId): void
     {
-        if (!$this->isActiveSchedule->execute($typeId)
-            || !$profileId = (int) $this->getProfileDataByTypeId->execute($typeId, ProfileInterface::ENTITY_ID)
-        ) {
+        if (!$this->isActiveSchedule->execute($typeId)) {
+            return;
+        }
+
+        $profileId = (int) $this->getProfileDataByTypeId->execute($typeId, ProfileInterface::ENTITY_ID);
+        if (!$profileId) {
             return;
         }
 
@@ -106,7 +63,7 @@ class ScheduleProcessor implements ScheduleProcessorInterface
             $this->processQueue($profileId);
         } catch (\Exception $e) {
             $message = $this->buildErrorMessage($typeId, $e->getMessage());
-            $this->processHistory($profileId, $typeId, $message, StatusInterface::ERROR);
+            $this->processHistory($profileId, $typeId, StatusInterface::ERROR, $message);
             $this->logger->execute(StatusInterface::ERROR, $message);
         }
     }
@@ -120,30 +77,32 @@ class ScheduleProcessor implements ScheduleProcessorInterface
     {
         foreach ($this->queues as $taskCode => $queue) {
             try {
-                $response = $queue->execute($profileId);
-                $response = $response->getData();
+                $messageCollector = $queue->execute($profileId);
+                $messages = $messageCollector->getMessages();
+                $status = $messageCollector->getOverallStatus();
             } catch (\Exception $e) {
-                $response = $this->buildErrorMessage($taskCode, $e->getMessage());
-                $this->logger->execute(StatusInterface::ERROR, $response);
+                $status = StatusInterface::ERROR;
+                $messages = $this->buildErrorMessage($taskCode, $e->getMessage());
+                $this->logger->execute(StatusInterface::ERROR, $messages);
             }
 
-            $this->processHistory($profileId, $taskCode, $response);
+            $this->processHistory($profileId, $taskCode, $status, $messages);
         }
     }
 
     /**
      * @param int $profileId
      * @param string $taskCode
-     * @param array $response
-     * @param string|null $status
+     * @param string $status
+     * @param array $messages
      * @return void
      * @throws LocalizedException
      */
     private function processHistory(
         int $profileId,
         string $taskCode,
-        array $response,
-        ?string $status = null
+        string $status,
+        array $messages
     ): void {
         if (!$this->scheduleConfig($profileId)->isActiveHistory()) {
             return;
@@ -152,12 +111,14 @@ class ScheduleProcessor implements ScheduleProcessorInterface
         $this->historyManagement->create(
             $profileId,
             $taskCode,
-            $status ?: $this->statusPrediction->execute($response),
-            $response
+            $status,
+            $messages
         );
     }
 
     /**
+     * Build error message in MessageCollector format
+     *
      * @param string $taskCode
      * @param $message
      * @return array
@@ -165,9 +126,12 @@ class ScheduleProcessor implements ScheduleProcessorInterface
     private function buildErrorMessage(string $taskCode, $message): array
     {
         return [
-            MessageStorageInterface::ENTITY => $taskCode,
-            MessageStorageInterface::STATUS => StatusInterface::ERROR,
-            MessageStorageInterface::MESSAGE => $message
+            $taskCode => [
+                [
+                    'message' => $message,
+                    'status' => StatusInterface::ERROR
+                ]
+            ]
         ];
     }
 

@@ -31,46 +31,6 @@ abstract class ProfileSchedule extends Action
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
-     * @var ProfileInterface|null
-     */
-    protected ?ProfileInterface $currentProfile = null;
-
-    /**
-     * @var Registry
-     */
-    protected Registry $coreRegistry;
-
-    /**
-     * @var ProfileFactory
-     */
-    protected ProfileFactory $profileFactory;
-
-    /**
-     * @var ProfileRepositoryInterface
-     */
-    protected ProfileRepositoryInterface $profileRepository;
-
-    /**
-     * @var LayoutFactory
-     */
-    protected LayoutFactory $resultLayoutFactory;
-
-    /**
-     * @var PageFactory
-     */
-    protected PageFactory $resultPageFactory;
-
-    /**
-     * @var JsonFactory
-     */
-    protected JsonFactory $resultJsonFactory;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    protected TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
      * @param Registry $coreRegistry
      * @param LayoutFactory $resultLayoutFactory
      * @param PageFactory $resultPageFactory
@@ -81,22 +41,15 @@ abstract class ProfileSchedule extends Action
      * @param Action\Context $context
      */
     public function __construct(
-        Registry $coreRegistry,
-        LayoutFactory $resultLayoutFactory,
-        PageFactory $resultPageFactory,
-        JsonFactory $resultJsonFactory,
-        ProfileFactory $profileFactory,
-        ProfileRepositoryInterface $profileRepository,
-        TypeInstanceOptionsInterface $typeInstanceOptions,
+        protected readonly Registry $coreRegistry,
+        protected readonly LayoutFactory $resultLayoutFactory,
+        protected readonly PageFactory $resultPageFactory,
+        protected readonly JsonFactory $resultJsonFactory,
+        protected readonly ProfileFactory $profileFactory,
+        protected readonly ProfileRepositoryInterface $profileRepository,
+        protected readonly TypeInstanceOptionsInterface $typeInstanceOptions,
         Action\Context $context
     ) {
-        $this->coreRegistry = $coreRegistry;
-        $this->resultLayoutFactory = $resultLayoutFactory;
-        $this->resultPageFactory = $resultPageFactory;
-        $this->resultJsonFactory = $resultJsonFactory;
-        $this->profileFactory = $profileFactory;
-        $this->profileRepository = $profileRepository;
-        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($context);
     }
 

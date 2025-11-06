@@ -22,16 +22,11 @@ class IsActiveSchedule implements IsActiveScheduleInterface
     private array $data = [];
 
     /**
-     * @var ResourceModel\Schedule
-     */
-    private ResourceModel\Schedule $resource;
-
-    /**
      * @param ResourceModel\Schedule $resource
      */
-    public function __construct(ResourceModel\Schedule $resource)
-    {
-        $this->resource = $resource;
+    public function __construct(
+        private readonly ResourceModel\Schedule $resource
+    ) {
     }
 
     /**

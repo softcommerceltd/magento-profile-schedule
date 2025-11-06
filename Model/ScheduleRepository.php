@@ -21,43 +21,12 @@ use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleSearchResultsInterface;
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleSearchResultsInterfaceFactory;
 use SoftCommerce\ProfileSchedule\Api\ScheduleRepositoryInterface;
-use SoftCommerce\ProfileSchedule\Model\ResourceModel;
 
 /**
  * @inheritDoc
  */
 class ScheduleRepository implements ScheduleRepositoryInterface
 {
-    /**
-     * @var ResourceModel\Schedule
-     */
-    private ResourceModel\Schedule $resource;
-
-    /**
-     * @var ScheduleFactory
-     */
-    private ScheduleFactory $modelFactory;
-
-    /**
-     * @var ResourceModel\Schedule\CollectionFactory
-     */
-    private ResourceModel\Schedule\CollectionFactory $collectionFactory;
-
-    /**
-     * @var ScheduleSearchResultsInterfaceFactory
-     */
-    private ScheduleSearchResultsInterfaceFactory $searchResultsFactory;
-
-    /**
-     * @var SearchCriteriaBuilder
-     */
-    private SearchCriteriaBuilder $searchCriteriaBuilder;
-
-    /**
-     * @var CollectionProcessorInterface
-     */
-    private CollectionProcessorInterface $collectionProcessor;
-
     /**
      * @param ResourceModel\Schedule $resource
      * @param ResourceModel\Schedule\CollectionFactory $collectionFactory
@@ -67,19 +36,13 @@ class ScheduleRepository implements ScheduleRepositoryInterface
      * @param SearchCriteriaBuilder $searchCriteriaBuilder
      */
     public function __construct(
-        ResourceModel\Schedule $resource,
-        ResourceModel\Schedule\CollectionFactory $collectionFactory,
-        ScheduleFactory $modelFactory,
-        ScheduleSearchResultsInterfaceFactory $searchResultsFactory,
-        CollectionProcessorInterface $collectionProcessor,
-        SearchCriteriaBuilder $searchCriteriaBuilder
+        private readonly ResourceModel\Schedule $resource,
+        private readonly ResourceModel\Schedule\CollectionFactory $collectionFactory,
+        private readonly ScheduleFactory $modelFactory,
+        private readonly ScheduleSearchResultsInterfaceFactory $searchResultsFactory,
+        private readonly CollectionProcessorInterface $collectionProcessor,
+        private readonly SearchCriteriaBuilder $searchCriteriaBuilder
     ) {
-        $this->resource = $resource;
-        $this->collectionFactory = $collectionFactory;
-        $this->modelFactory = $modelFactory;
-        $this->searchResultsFactory = $searchResultsFactory;
-        $this->collectionProcessor = $collectionProcessor;
-        $this->searchCriteriaBuilder = $searchCriteriaBuilder;
     }
 
     /**

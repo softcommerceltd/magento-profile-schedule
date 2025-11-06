@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Model\Config;
 
 use Magento\Framework\Exception\LocalizedException;
-use SoftCommerce\ProfileConfig\Model\ConfigInterface;
+use SoftCommerce\Profile\Model\Config\ConfigInterface;
 
 /**
  * Interface ScheduleConfigInterface used to provide
@@ -25,6 +25,7 @@ interface ScheduleConfigInterface extends ConfigInterface
     public const XML_PATH_PROCESS_BATCH_SIZE = '/schedule_config/process_batch_size';
     public const XML_PATH_RETRY_ON_ERROR = '/schedule_config/retry_on_error';
     public const XML_PATH_ENABLE_HISTORY = '/schedule_config/enable_history';
+    public const XML_PATH_ENABLE_RETRY_ON_FAILURE = '/schedule_config/enable_retry_on_failure';
     public const XML_PATH_ENABLE_1TIME_FULL_PROCESS = '/schedule_config/enable_onetime_full_process';
     public const XML_PATH_1TIME_FULL_PROCESS_FREQUENCY = '/schedule_config/onetime_full_process_frequency';
     public const XML_PATH_1TIME_FULL_PROCESS_TIME = '/schedule_config/onetime_full_process_time';
@@ -55,6 +56,17 @@ interface ScheduleConfigInterface extends ConfigInterface
      * @throws LocalizedException
      */
     public function isActiveHistory(): bool;
+
+    /**
+     * Check if automatic retry on failure is enabled.
+     *
+     * When enabled, failed order exports will be automatically retried
+     * every hour for up to 12 hours (only for orders less than 24 hours old).
+     *
+     * @return bool
+     * @throws LocalizedException
+     */
+    public function isRetryOnFailureEnabled(): bool;
 
     /**
      * @return bool
