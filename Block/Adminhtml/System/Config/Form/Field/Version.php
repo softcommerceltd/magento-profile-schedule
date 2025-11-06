@@ -19,21 +19,15 @@ use Magento\Framework\Module\PackageInfo;
 class Version extends Field
 {
     /**
-     * @var PackageInfo
-     */
-    private PackageInfo $packageInfo;
-
-    /**
      * @param PackageInfo $packageInfo
      * @param Context $context
      * @param array $data
      */
     public function __construct(
-        PackageInfo $packageInfo,
+        private readonly PackageInfo $packageInfo,
         Context $context,
         array $data = []
     ) {
-        $this->packageInfo = $packageInfo;
         parent::__construct($context, $data);
     }
 

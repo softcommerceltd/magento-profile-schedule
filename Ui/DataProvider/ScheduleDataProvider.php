@@ -21,11 +21,6 @@ use SoftCommerce\ProfileSchedule\Model\Schedule;
 class ScheduleDataProvider extends AbstractDataProvider
 {
     /**
-     * @var PoolInterface
-     */
-    private PoolInterface $pool;
-
-    /**
      * @var array|null
      */
     private ?array $loadedData = null;
@@ -41,7 +36,7 @@ class ScheduleDataProvider extends AbstractDataProvider
      */
     public function __construct(
         CollectionFactory $collectionFactory,
-        PoolInterface $pool,
+        private readonly PoolInterface $pool,
         string $name,
         string $primaryFieldName,
         string $requestFieldName,
@@ -49,7 +44,6 @@ class ScheduleDataProvider extends AbstractDataProvider
         array $data = []
     ) {
         $this->collection = $collectionFactory->create();
-        $this->pool = $pool;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 

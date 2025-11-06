@@ -20,24 +20,9 @@ use SoftCommerce\ProfileSchedule\Model\GetScheduleDataInterface;
 class ProfileTypeOptions implements OptionSourceInterface
 {
     /**
-     * @var GetScheduleDataInterface
-     */
-    private GetScheduleDataInterface $getScheduleData;
-
-    /**
      * @var array|null
      */
     private ?array $options = null;
-
-    /**
-     * @var RequestInterface
-     */
-    private RequestInterface $request;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    private TypeInstanceOptionsInterface $typeInstanceOptions;
 
     /**
      * @param GetScheduleDataInterface $getScheduleData
@@ -45,13 +30,10 @@ class ProfileTypeOptions implements OptionSourceInterface
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
      */
     public function __construct(
-        GetScheduleDataInterface $getScheduleData,
-        RequestInterface $request,
-        TypeInstanceOptionsInterface $typeInstanceOptions
+        private readonly GetScheduleDataInterface $getScheduleData,
+        private readonly RequestInterface $request,
+        private readonly TypeInstanceOptionsInterface $typeInstanceOptions
     ) {
-        $this->getScheduleData = $getScheduleData;
-        $this->request = $request;
-        $this->typeInstanceOptions = $typeInstanceOptions;
     }
 
     /**

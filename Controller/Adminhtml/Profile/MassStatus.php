@@ -27,11 +27,6 @@ use SoftCommerce\ProfileSchedule\Model\ResourceModel\Schedule;
 class MassStatus extends AbstractMassAction implements HttpPostActionInterface
 {
     /**
-     * @var Schedule
-     */
-    private Schedule $resource;
-
-    /**
      * @param Context $context
      * @param Filter $filter
      * @param Schedule $resource
@@ -40,10 +35,9 @@ class MassStatus extends AbstractMassAction implements HttpPostActionInterface
     public function __construct(
         Context $context,
         Filter $filter,
-        Schedule $resource,
+        private readonly Schedule $resource,
         ResourceModel\Profile\CollectionFactory $collectionFactory
     ) {
-        $this->resource = $resource;
         parent::__construct($context, $filter, $collectionFactory);
     }
 

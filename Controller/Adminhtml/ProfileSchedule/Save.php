@@ -20,8 +20,8 @@ use Magento\Framework\Exception\AlreadyExistsException;
 use Magento\Framework\Exception\CouldNotSaveException;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\View\LayoutFactory;
+use SoftCommerce\Profile\Model\Config\ConfigScopeWriterInterface;
 use SoftCommerce\Profile\Model\TypeInstanceOptionsInterface;
-use SoftCommerce\ProfileConfig\Model\ConfigScopeWriterInterface;
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
 use SoftCommerce\ProfileSchedule\Api\ScheduleRepositoryInterface;
 use SoftCommerce\ProfileSchedule\Model\GetProfileIdByScheduleInterface;
@@ -39,51 +39,6 @@ class Save extends Action implements HttpPostActionInterface
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
-     * @var ConfigScopeWriterInterface
-     */
-    private ConfigScopeWriterInterface $configScopeWriter;
-
-    /**
-     * @var GetProfileIdByScheduleInterface
-     */
-    private GetProfileIdByScheduleInterface $getProfileIdBySchedule;
-
-    /**
-     * @var ScheduleInterface|null
-     */
-    private ?ScheduleInterface $model = null;
-
-    /**
-     * @var ScheduleFactory
-     */
-    private ScheduleFactory $modelFactory;
-
-    /**
-     * @var LayoutFactory
-     */
-    private LayoutFactory $layoutFactory;
-
-    /**
-     * @var ReinitableConfigInterface
-     */
-    private ReinitableConfigInterface $reinitableConfig;
-
-    /**
-     * @var ScheduleRepositoryInterface
-     */
-    private ScheduleRepositoryInterface $repository;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    private TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
-     * @var WriterInterface
-     */
-    private WriterInterface $configWriter;
-
-    /**
      * @param ConfigScopeWriterInterface $configScopeWriter
      * @param GetProfileIdByScheduleInterface $getProfileIdBySchedule
      * @param LayoutFactory $layoutFactory
@@ -95,24 +50,16 @@ class Save extends Action implements HttpPostActionInterface
      * @param Context $context
      */
     public function __construct(
-        ConfigScopeWriterInterface $configScopeWriter,
-        GetProfileIdByScheduleInterface $getProfileIdBySchedule,
-        LayoutFactory $layoutFactory,
-        ReinitableConfigInterface $reinitableConfig,
-        ScheduleFactory $modelFactory,
-        ScheduleRepositoryInterface $repository,
-        TypeInstanceOptionsInterface $typeInstanceOptions,
-        WriterInterface $configWriter,
+        private readonly ConfigScopeWriterInterface $configScopeWriter,
+        private readonly GetProfileIdByScheduleInterface $getProfileIdBySchedule,
+        private readonly LayoutFactory $layoutFactory,
+        private readonly ReinitableConfigInterface $reinitableConfig,
+        private readonly ScheduleFactory $modelFactory,
+        private readonly ScheduleRepositoryInterface $repository,
+        private readonly TypeInstanceOptionsInterface $typeInstanceOptions,
+        private readonly WriterInterface $configWriter,
         Context $context
     ) {
-        $this->configScopeWriter = $configScopeWriter;
-        $this->getProfileIdBySchedule = $getProfileIdBySchedule;
-        $this->layoutFactory = $layoutFactory;
-        $this->reinitableConfig = $reinitableConfig;
-        $this->modelFactory = $modelFactory;
-        $this->repository = $repository;
-        $this->typeInstanceOptions = $typeInstanceOptions;
-        $this->configWriter = $configWriter;
         parent::__construct($context);
     }
 

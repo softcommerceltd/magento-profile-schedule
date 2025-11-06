@@ -22,25 +22,13 @@ class HistoryListModifier implements ModifierInterface
     private const FORM_NAME = 'softcommerce_profile_schedule_form';
 
     /**
-     * @var MetadataPoolInterface
-     */
-    private MetadataPoolInterface $metadataPool;
-
-    /**
-     * @var RequestInterface
-     */
-    private RequestInterface $request;
-
-    /**
      * @param MetadataPoolInterface $metadataPool
      * @param RequestInterface $request
      */
     public function __construct(
-        MetadataPoolInterface $metadataPool,
-        RequestInterface $request
+        private readonly MetadataPoolInterface $metadataPool,
+        private readonly RequestInterface $request
     ) {
-        $this->metadataPool = $metadataPool;
-        $this->request = $request;
     }
 
     /**

@@ -28,19 +28,13 @@ class InlineEdit extends Action implements HttpPostActionInterface
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
-     * @var Schedule
-     */
-    private Schedule $resource;
-
-    /**
      * @param Schedule $resource
      * @param Context $context
      */
     public function __construct(
-        Schedule $resource,
+        private readonly Schedule $resource,
         Context $context
     ) {
-        $this->resource = $resource;
         parent::__construct($context);
     }
 

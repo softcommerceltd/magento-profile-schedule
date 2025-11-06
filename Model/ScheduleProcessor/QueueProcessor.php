@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace SoftCommerce\ProfileSchedule\Model\ScheduleProcessor;
 
-use SoftCommerce\Core\Framework\MessageStorageInterface;
-use SoftCommerce\Core\Framework\MessageStorageInterfaceFactory;
+use SoftCommerce\Core\Framework\MessageCollectorInterface;
+use SoftCommerce\Core\Framework\MessageCollectorInterfaceFactory;
 
 /**
  * @inheritDoc
@@ -17,16 +17,19 @@ use SoftCommerce\Core\Framework\MessageStorageInterfaceFactory;
 abstract class QueueProcessor implements QueueProcessorInterface
 {
     /**
-     * @var MessageStorageInterface
+     * New message collector for structured message handling
+     * Replaces MessageStorage with format-agnostic collection
+     *
+     * @var MessageCollectorInterface
      */
-    protected MessageStorageInterface $messageStorage;
+    protected MessageCollectorInterface $messageCollector;
 
     /**
-     * @param MessageStorageInterfaceFactory $messageStorageFactory
+     * @param MessageCollectorInterfaceFactory $messageCollectorFactory
      */
-    public function __construct(MessageStorageInterfaceFactory $messageStorageFactory)
+    public function __construct(protected readonly MessageCollectorInterfaceFactory $messageCollectorFactory)
     {
-        $this->messageStorage = $messageStorageFactory->create();
+        $this->messageCollector = $this->messageCollectorFactory->create();
     }
 
     /**
@@ -34,6 +37,6 @@ abstract class QueueProcessor implements QueueProcessorInterface
      */
     protected function init(): void
     {
-        $this->messageStorage->resetData();
+        $this->messageCollector->reset();
     }
 }

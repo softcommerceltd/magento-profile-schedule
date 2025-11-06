@@ -17,16 +17,11 @@ use Magento\Framework\ObjectManagerInterface;
 class Pool
 {
     /**
-     * @var ObjectManagerInterface
-     */
-    private ObjectManagerInterface $objectManager;
-
-    /**
      * @param ObjectManagerInterface $objectManager
      */
-    public function __construct(ObjectManagerInterface $objectManager)
-    {
-        $this->objectManager = $objectManager;
+    public function __construct(
+        private readonly ObjectManagerInterface $objectManager
+    ) {
     }
 
     /**

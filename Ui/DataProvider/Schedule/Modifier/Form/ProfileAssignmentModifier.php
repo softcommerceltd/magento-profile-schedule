@@ -22,25 +22,13 @@ class ProfileAssignmentModifier implements ModifierInterface
     private const DATA_SOURCE = 'profiles';
 
     /**
-     * @var GetProfileIdByScheduleInterface
-     */
-    private GetProfileIdByScheduleInterface $getProfileIdBySchedule;
-
-    /**
-     * @var RequestInterface
-     */
-    private RequestInterface $request;
-
-    /**
      * @param GetProfileIdByScheduleInterface $getProfileIdBySchedule
      * @param RequestInterface $request
      */
     public function __construct(
-        GetProfileIdByScheduleInterface $getProfileIdBySchedule,
-        RequestInterface $request
+        private readonly GetProfileIdByScheduleInterface $getProfileIdBySchedule,
+        private readonly RequestInterface $request
     ) {
-        $this->getProfileIdBySchedule = $getProfileIdBySchedule;
-        $this->request = $request;
     }
 
     /**

@@ -9,7 +9,7 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Model\ScheduleProcessor;
 
 use Magento\Framework\Exception\LocalizedException;
-use SoftCommerce\Core\Framework\MessageStorageInterface;
+use SoftCommerce\Core\Framework\MessageCollectorInterface;
 
 /**
  * Interface QueueProcessorInterface used
@@ -21,8 +21,8 @@ interface QueueProcessorInterface
 
     /**
      * @param int $profileId
-     * @return MessageStorageInterface
+     * @return MessageCollectorInterface
      * @throws LocalizedException
      */
-    public function execute(int $profileId): MessageStorageInterface;
+    public function execute(int $profileId): MessageCollectorInterface;
 }

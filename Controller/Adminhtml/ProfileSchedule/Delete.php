@@ -31,35 +31,17 @@ class Delete extends Action implements HttpPostActionInterface
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
     /**
-     * @var WriterInterface
-     */
-    private WriterInterface $configWriter;
-
-    /**
-     * @var ScheduleRepositoryInterface
-     */
-    private ScheduleRepositoryInterface $scheduleRepository;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    private TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
      * @param WriterInterface $configWriter
      * @param ScheduleRepositoryInterface $scheduleRepository
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
      * @param Context $context
      */
     public function __construct(
-        WriterInterface $configWriter,
-        ScheduleRepositoryInterface $scheduleRepository,
-        TypeInstanceOptionsInterface $typeInstanceOptions,
+        private readonly WriterInterface $configWriter,
+        private readonly ScheduleRepositoryInterface $scheduleRepository,
+        private readonly TypeInstanceOptionsInterface $typeInstanceOptions,
         Context $context
     ) {
-        $this->configWriter = $configWriter;
-        $this->scheduleRepository = $scheduleRepository;
-        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($context);
     }
 

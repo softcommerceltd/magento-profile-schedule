@@ -24,25 +24,13 @@ class GetProfileIdBySchedule implements GetProfileIdByScheduleInterface
     private array $data = [];
 
     /**
-     * @var GetProfileDataByTypeIdInterface
-     */
-    private GetProfileDataByTypeIdInterface $getProfileDataByTypeId;
-
-    /**
-     * @var ScheduleConfigInterface
-     */
-    private ScheduleConfigInterface $scheduleConfig;
-
-    /**
      * @param GetProfileDataByTypeIdInterface $getProfileDataByTypeId
      * @param ScheduleConfigInterface $scheduleConfig
      */
     public function __construct(
-        GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
-        ScheduleConfigInterface $scheduleConfig
+        private readonly GetProfileDataByTypeIdInterface $getProfileDataByTypeId,
+        private readonly ScheduleConfigInterface $scheduleConfig
     ) {
-        $this->getProfileDataByTypeId = $getProfileDataByTypeId;
-        $this->scheduleConfig = $scheduleConfig;
     }
 
     /**
