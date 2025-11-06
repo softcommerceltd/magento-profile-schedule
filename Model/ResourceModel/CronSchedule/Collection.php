@@ -31,11 +31,6 @@ class Collection extends CronScheduleCollection
     ];
 
     /**
-     * @var RequestInterface
-     */
-    private RequestInterface $request;
-
-    /**
      * @param RequestInterface $request
      * @param EntityFactoryInterface $entityFactory
      * @param LoggerInterface $logger
@@ -45,15 +40,14 @@ class Collection extends CronScheduleCollection
      * @param AbstractDb|null $resource
      */
     public function __construct(
-        RequestInterface $request,
+        private readonly RequestInterface $request,
         EntityFactoryInterface $entityFactory,
         LoggerInterface $logger,
         FetchStrategyInterface $fetchStrategy,
         ManagerInterface $eventManager,
-        AdapterInterface $connection = null,
-        AbstractDb $resource = null
+        ?AdapterInterface $connection = null,
+        ?AbstractDb $resource = null
     ) {
-        $this->request = $request;
         parent::__construct($entityFactory, $logger, $fetchStrategy, $eventManager, $connection, $resource);
     }
 

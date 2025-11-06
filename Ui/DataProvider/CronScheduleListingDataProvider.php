@@ -25,16 +25,6 @@ use SoftCommerce\ProfileSchedule\Model\ResourceModel\CronSchedule\CollectionFact
 class CronScheduleListingDataProvider extends AbstractDataProvider
 {
     /**
-     * @var PoolInterface
-     */
-    private PoolInterface $pool;
-
-    /**
-     * @var TypeInstanceOptionsInterface
-     */
-    private TypeInstanceOptionsInterface $typeInstanceOptions;
-
-    /**
      * @param CollectionFactory $collectionFactory
      * @param PoolInterface $pool
      * @param TypeInstanceOptionsInterface $typeInstanceOptions
@@ -46,8 +36,8 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
      */
     public function __construct(
         CollectionFactory $collectionFactory,
-        PoolInterface $pool,
-        TypeInstanceOptionsInterface $typeInstanceOptions,
+        private readonly PoolInterface $pool,
+        private readonly TypeInstanceOptionsInterface $typeInstanceOptions,
         string $name,
         string $primaryFieldName,
         string $requestFieldName,
@@ -55,8 +45,6 @@ class CronScheduleListingDataProvider extends AbstractDataProvider
         array $data = []
     ) {
         $this->collection = $collectionFactory->create();
-        $this->pool = $pool;
-        $this->typeInstanceOptions = $typeInstanceOptions;
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 

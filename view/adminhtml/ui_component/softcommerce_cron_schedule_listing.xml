@@ -17,7 +17,25 @@
             <dep>softcommerce_cron_schedule_listing.softcommerce_cron_schedule_listing_data_source</dep>
         </deps>
     </settings>
-    <dataSource name="softcommerce_cron_schedule_listing_data_source" component="Magento_Ui/js/grid/provider">
+    <container name="listing_top">
+        <argument name="data" xsi:type="array">
+            <item name="config" xsi:type="array">
+                <item name="template" xsi:type="string">SoftCommerce_ProfileSchedule/grid/toolbar</item>
+            </item>
+        </argument>
+        <container name="columns_controls">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="columnsData" xsi:type="array">
+                        <item name="provider" xsi:type="string">softcommerce_cron_schedule_listing.softcommerce_cron_schedule_listing.softcommerce_cron_schedule_columns</item>
+                    </item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/controls/columns</item>
+                    <item name="displayArea" xsi:type="string">dataGridActions</item>
+                </item>
+            </argument>
+        </container>
+    </container>
+    <dataSource name="softcommerce_cron_schedule_listing_data_source" component="SoftCommerce_ProfileSchedule/js/grid/provider-auto-refresh">
         <settings>
             <filterUrlParams>
                 <param name="id">*</param>

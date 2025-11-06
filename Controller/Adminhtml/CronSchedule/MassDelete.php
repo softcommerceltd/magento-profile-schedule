@@ -20,23 +20,17 @@ use SoftCommerce\ProfileSchedule\Model\ResourceModel\CronSchedule\CollectionFact
 class MassDelete extends AbstractMassAction
 {
     /**
-     * @var ResourceConnection
-     */
-    private ResourceConnection $resourceConnection;
-
-    /**
      * @param ResourceConnection $resourceConnection
      * @param CollectionFactory $collectionFactory
      * @param Filter $filter
      * @param Context $context
      */
     public function __construct(
-        ResourceConnection $resourceConnection,
+        private readonly ResourceConnection $resourceConnection,
         CollectionFactory $collectionFactory,
         Filter $filter,
         Context $context
     ) {
-        $this->resourceConnection = $resourceConnection;
         parent::__construct($collectionFactory, $filter, $context);
     }
 
