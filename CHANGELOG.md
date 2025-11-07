@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2025-11-07
+### BREAKING CHANGES
+- upgrade to PHP 8.1+ with comprehensive modernization
+- add PHP 8.3/8.4 compatibility and modernize schedule module
+### Added
+- add comprehensive cron schedule monitoring UI
+
 ## [1.3.8] - 2025-07-24
 ### Changed
 - The metapackage release notes are now properly extracting and formatting the module changes from the CHANGELOG.md file
