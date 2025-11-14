@@ -43,7 +43,8 @@ class ScheduleProcessor implements ScheduleProcessorInterface
         private readonly LogProcessorInterface $logger,
         private readonly ScheduleConfigInterfaceFactory $scheduleConfigFactory,
         private array $queues = []
-    ) {}
+    ) {
+    }
 
     /**
      * @inheritDoc
