@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.2] - 2026-01-12
+### Fixed
+- add missing model property declaration in Save controller
+
 ## [2.0.1] - 2025-11-27
 
 ## [2.0.0] - 2025-11-07
