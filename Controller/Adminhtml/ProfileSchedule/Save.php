@@ -38,6 +38,8 @@ class Save extends Action implements HttpPostActionInterface
      */
     public const ADMIN_RESOURCE = 'SoftCommerce_ProfileSchedule::manage';
 
+    private $model = null;
+
     /**
      * @param ConfigScopeWriterInterface $configScopeWriter
      * @param GetProfileIdByScheduleInterface $getProfileIdBySchedule
