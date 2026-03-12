@@ -5,5 +5,5 @@ Magento - SoftCommerce. Profile schedule entity module.
 Used to manage profile schedules.
 
 ## Support
-Soft Commerce Ltd <br />
-support@softcommerce.co.uk
+Byte8 Ltd <br />
+support@byte8.io
