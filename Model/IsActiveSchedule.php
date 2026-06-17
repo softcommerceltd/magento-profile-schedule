@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace SoftCommerce\ProfileSchedule\Model;
 
 use SoftCommerce\ProfileSchedule\Api\Data\ScheduleInterface;
-use SoftCommerce\ProfileSchedule\Model\ResourceModel;
 
 /**
  * @inheritDoc
